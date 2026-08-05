@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className += " js";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Vera Consult – Sicherheits- und Complianceberatung für Unternehmen und öffentliche Auftraggeber. Interne Ermittlungen, Geldwäscheprävention, Krisenmanagement, Schulungen.">
 <title>Vera Consult · Sicherheits- &amp; Complianceberatung</title>
@@ -56,11 +57,13 @@
   .mark .v { fill: currentColor; }
   .mark .bar { fill: var(--brass); }
 
-  /* ---------- Reveal on scroll ---------- */
-  .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
-  .rv.in { opacity: 1; transform: none; }
+  /* ---------- Reveal beim Scrollen ----------
+     Inhalte sind grundsätzlich sichtbar; nur wenn JavaScript läuft (.js),
+     werden sie für die Einblend-Animation zunächst ausgeblendet. */
+  .js .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
+  .js .rv.in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
-    .rv { opacity: 1; transform: none; transition: none; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
   }
 
   /* ---------- Nav ---------- */
@@ -532,16 +535,50 @@
   var track = document.getElementById("tickerTrack");
   track.innerHTML += track.innerHTML;
 
-  /* Scroll-Reveals */
-  if ("IntersectionObserver" in window && !reduced) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll(".rv").forEach(function (el) { io.observe(el); });
+  /* Scroll-Reveals: alles einblenden, was den unteren Bildschirmrand erreicht
+     hat oder bereits darüber liegt – auch bei sehr schnellem Scrollen. */
+  var offen = Array.prototype.slice.call(document.querySelectorAll(".rv"));
+  function alleZeigen() {
+    offen.forEach(function (el) { el.classList.add("in"); });
+    offen = [];
+  }
+  if (reduced) {
+    alleZeigen();
   } else {
-    document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("in"); });
+    /* 1. IntersectionObserver – greift auch in eingebetteten Scroll-Containern */
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+            offen = offen.filter(function (x) { return x !== en.target; });
+          }
+        });
+      }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
+      offen.forEach(function (el) { io.observe(el); });
+    }
+    /* 2. Positionsprüfung – fängt Elemente ab, die bei sehr schnellem
+          Scrollen zwischen zwei Frames übersprungen wurden */
+    var geplant = false;
+    function pruefen() {
+      geplant = false;
+      var grenze = window.innerHeight * 0.92;
+      offen = offen.filter(function (el) {
+        if (el.getBoundingClientRect().top < grenze) { el.classList.add("in"); return false; }
+        return true;
+      });
+    }
+    function anstossen() {
+      if (geplant) return;
+      geplant = true;
+      requestAnimationFrame(pruefen);
+    }
+    window.addEventListener("scroll", anstossen, { passive: true });
+    window.addEventListener("resize", anstossen);
+    pruefen();
+    /* 3. Sicherheitsnetz: nach 8 s ist garantiert nichts mehr unsichtbar */
+    setTimeout(alleZeigen, 8000);
   }
 
   /* Netzwerk-Canvas im Hero */
