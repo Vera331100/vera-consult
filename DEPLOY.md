@@ -48,5 +48,9 @@ git push -u origin main
 
 ## Interner Zugang
 
-Das Kontaktregister liegt unverlinkt unter `https://vera-consult.de/intern`
-(Login mit dem Zugangscode aus der Umgebungsvariable).
+Das Kontaktregister liegt unverlinkt unter `https://vera-consult.de/intern`.
+
+Anmeldung mit **Benutzername + Zugangscode**:
+
+- Benutzernamen: `Sinarius` und `Brukulus` (in `server.js` unter `USERS` gepflegt)
+- Zugangscode: für beide identisch, aus der Umgebungsvariable `KONTAKTREGISTER_PASS`

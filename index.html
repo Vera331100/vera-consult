@@ -3,50 +3,53 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
 <title>Vera Consult · Kontaktregister</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 116'%3E%3Crect width='96' height='116' fill='%23141C2E'/%3E%3Cpath d='M9 25 L25 15 L48.1 56 L71 15 L87 25 L47.5 94 Z' fill='%23FBFAF7'/%3E%3Crect x='14' y='101' width='68' height='9' fill='%23C2913A'/%3E%3C/svg%3E">
 <style>
   :root {
-    --bg: #F5F6F8;
+    --tinte: #141C2E;
+    --messing: #C2913A;
+    --papier: #FBFAF7;
+
+    --bg: #F3F2ED;
     --surface: #FFFFFF;
-    --surface-2: #EEF1F4;
-    --ink: #1A2129;
-    --muted: #5C6B7A;
-    --line: #DDE3EA;
-    --accent: #146C7A;
-    --accent-soft: #E3F0F2;
+    --surface-2: #EAE8E1;
+    --ink: #141C2E;
+    --muted: #5F6A78;
+    --line: #DFDCD3;
+    --accent: #8E6828;
+    --accent-soft: #F3E9D6;
     --accent-ink: #FFFFFF;
-    --danger: #B3423A;
-    --ok: #2E8B57;
-    --shadow: 0 1px 3px rgba(16,24,32,.08), 0 4px 16px rgba(16,24,32,.06);
-    --radius: 8px;
+    --danger: #A33A32;
+    --ok: #2F7A55;
+    --shadow: 0 1px 3px rgba(20,28,46,.08), 0 4px 16px rgba(20,28,46,.06);
+    --radius: 4px;
     --mono: "Cascadia Mono", Consolas, "Courier New", monospace;
     --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #12161B;
-      --surface: #1A2129;
-      --surface-2: #212A34;
-      --ink: #E8EDF2;
-      --muted: #8CA0B3;
-      --line: #2A3441;
-      --accent: #3FB6C9;
-      --accent-soft: #16323A;
-      --accent-ink: #0C1418;
-      --danger: #E07B74;
+      --bg: #0F1624;
+      --surface: #171F33;
+      --surface-2: #1E2740;
+      --ink: #E9EBF0;
+      --muted: #99A3B4;
+      --line: #26314A;
+      --accent: #DCAB53;
+      --accent-soft: #2A2317;
+      --accent-ink: #141C2E;
+      --danger: #E08880;
       --ok: #6FBF94;
-      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+      --shadow: 0 1px 3px rgba(0,0,0,.45), 0 4px 16px rgba(0,0,0,.35);
     }
   }
 
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 14.5px;
-    line-height: 1.5;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 14.5px; line-height: 1.5;
   }
   button { font-family: inherit; font-size: inherit; cursor: pointer; }
   input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
@@ -54,53 +57,41 @@
 
   .app { max-width: 1180px; margin: 0 auto; padding: 20px 20px 60px; }
 
+  /* ---------- Logo ---------- */
+  .mark .v { fill: currentColor; }
+  .mark .bar { fill: var(--messing); }
+
   /* ---------- Header ---------- */
   header.top {
     display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
     padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px;
   }
-  .brand { display: flex; align-items: center; gap: 13px; }
-  .brand .logo { width: 42px; height: 42px; flex: none; }
-  .brand .logo .shield { fill: var(--accent); }
-  .brand .logo .mark { stroke: var(--accent-ink); }
-  header.top h1 {
-    font-size: 18px; font-weight: 700; margin: 0;
-    letter-spacing: .18em; text-transform: uppercase;
-  }
-  header.top h1 small {
-    display: block; font-size: 10.5px; font-weight: 650; letter-spacing: .22em;
-    color: var(--muted); margin-top: 1px;
-  }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); }
+  .brand .mark { width: 22px; height: auto; flex: none; }
+  .brand-word { display: flex; flex-direction: column; line-height: 1; }
+  .brand-word b { font-family: var(--display); font-size: 17px; font-weight: 700; letter-spacing: .16em; }
+  .brand-word span { font-family: var(--display); font-size: 9px; letter-spacing: .4em; color: var(--muted); margin-top: 3px; }
   header.top .sub { color: var(--muted); font-size: 13px; }
   header.top .spacer { flex: 1; }
-  .conn {
-    font-size: 12px; color: var(--muted);
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .conn::before {
-    content: ""; width: 8px; height: 8px; border-radius: 50%;
-    background: var(--danger); flex: none;
-  }
+  .who { font-size: 12.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 10px; }
+  .who b { color: var(--ink); font-family: var(--mono); font-size: 12.5px; }
+  .conn { font-size: 12px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .conn::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); flex: none; }
   .conn.online::before { background: var(--ok); }
+  .linkish { background: none; border: 0; color: var(--muted); text-decoration: underline; padding: 0; font-size: 12.5px; }
+  .linkish:hover { color: var(--ink); }
 
   /* ---------- Toolbar ---------- */
   .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
   .tabs { display: inline-flex; background: var(--surface-2); border-radius: var(--radius); padding: 3px; gap: 2px; }
-  .tabs button {
-    border: 0; background: transparent; color: var(--muted);
-    padding: 6px 14px; border-radius: 6px; font-weight: 600;
-  }
+  .tabs button { border: 0; background: transparent; color: var(--muted); padding: 6px 14px; border-radius: 3px; font-weight: 600; }
   .tabs button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
   .toolbar input[type="search"], .toolbar select {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 7px 10px; min-width: 0;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 7px 10px; min-width: 0;
   }
   .toolbar input[type="search"] { flex: 1 1 180px; }
   .toolbar .spacer { flex: 0 0 0; margin-left: auto; }
-  .btn {
-    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
-    border-radius: var(--radius); padding: 7px 14px; font-weight: 600;
-  }
+  .btn { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: var(--radius); padding: 7px 14px; font-weight: 600; }
   .btn:hover { border-color: var(--muted); }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
   .btn.primary:hover { filter: brightness(1.08); }
@@ -108,96 +99,66 @@
 
   /* ---------- Stats ---------- */
   .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-  .stat {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 8px 14px; display: flex; align-items: baseline; gap: 8px;
-  }
+  .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 14px; display: flex; align-items: baseline; gap: 8px; }
   .stat b { font-size: 18px; font-variant-numeric: tabular-nums; }
   .stat span { color: var(--muted); font-size: 12.5px; }
 
   /* ---------- Chips ---------- */
-  .chip {
-    display: inline-block; padding: 2px 9px; border-radius: 20px;
-    font-size: 12px; font-weight: 600; white-space: nowrap;
-    border: 1px solid transparent;
-  }
+  .chip { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; border: 1px solid transparent; }
   .chip.kat { background: var(--accent-soft); color: var(--accent); }
   .chip.st-neu        { background: #64748B22; color: #64748B; border-color: #64748B44; }
   .chip.st-kontakt    { background: #2F6FB222; color: #2F6FB2; border-color: #2F6FB244; }
   .chip.st-gespraech  { background: #B7732422; color: #B77324; border-color: #B7732444; }
-  .chip.st-cv         { background: #1C8E9E22; color: #1C8E9E; border-color: #1C8E9E44; }
-  .chip.st-aktiv      { background: #2E8B5722; color: #2E8B57; border-color: #2E8B5744; }
-  .chip.st-abgeschlossen { background: #7A5EA822; color: #7A5EA8; border-color: #7A5EA844; }
+  .chip.st-cv         { background: #8E682822; color: #8E6828; border-color: #8E682844; }
+  .chip.st-aktiv      { background: #2F7A5522; color: #2F7A55; border-color: #2F7A5544; }
+  .chip.st-abgeschlossen { background: #6B528F22; color: #6B528F; border-color: #6B528F44; }
   @media (prefers-color-scheme: dark) {
     .chip.st-neu       { color: #94A3B8; }
     .chip.st-kontakt   { color: #7FAEDD; }
     .chip.st-gespraech { color: #D9A05B; }
-    .chip.st-cv        { color: #56C4D2; }
+    .chip.st-cv        { color: #DCAB53; }
     .chip.st-aktiv     { color: #6FBF94; }
-    .chip.st-abgeschlossen { color: #A98FD6; }
+    .chip.st-abgeschlossen { color: #AC93D4; }
   }
 
   .alias { font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
 
-  /* ---------- List view ---------- */
+  /* ---------- List ---------- */
   .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
   table { width: 100%; border-collapse: collapse; min-width: 760px; }
   th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
-  th {
-    font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em;
-    color: var(--muted); font-weight: 650; background: var(--surface-2);
-  }
+  th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 650; background: var(--surface-2); }
   tbody tr { cursor: pointer; }
   tbody tr:hover { background: var(--surface-2); }
   tbody tr:last-child td { border-bottom: 0; }
   td .muted { color: var(--muted); font-size: 13px; }
   .empty { padding: 48px 20px; text-align: center; color: var(--muted); }
 
-  /* ---------- Board view ---------- */
+  /* ---------- Board ---------- */
   .board { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
-  .col {
-    flex: 0 0 240px; background: var(--surface-2); border-radius: var(--radius);
-    padding: 10px; min-height: 120px;
-  }
-  .col h3 {
-    margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
-    color: var(--muted); display: flex; justify-content: space-between; font-weight: 650;
-  }
+  .col { flex: 0 0 240px; background: var(--surface-2); border-radius: var(--radius); padding: 10px; min-height: 120px; }
+  .col h3 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); display: flex; justify-content: space-between; font-weight: 650; }
   .col h3 b { font-variant-numeric: tabular-nums; }
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 10px 12px; margin-bottom: 8px; cursor: grab; box-shadow: var(--shadow);
-  }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; margin-bottom: 8px; cursor: grab; box-shadow: var(--shadow); }
   .card:active { cursor: grabbing; }
   .card .alias { display: block; margin-bottom: 4px; }
   .card .meta { font-size: 12.5px; color: var(--muted); }
   .col.dragover { outline: 2px dashed var(--accent); outline-offset: -4px; }
 
   /* ---------- Modal ---------- */
-  dialog {
-    border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink);
-    width: min(680px, calc(100vw - 32px)); padding: 0; box-shadow: var(--shadow);
-  }
-  dialog::backdrop { background: rgba(10,14,18,.45); }
-  .modal-head {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 20px; border-bottom: 1px solid var(--line);
-  }
-  .modal-head h2 { margin: 0; font-size: 16px; }
+  dialog { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink); width: min(680px, calc(100vw - 32px)); padding: 0; box-shadow: var(--shadow); }
+  dialog::backdrop { background: rgba(10,14,22,.5); }
+  .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .modal-head h2 { margin: 0; font-size: 16px; font-family: var(--display); }
   .modal-body { padding: 20px; max-height: 70vh; overflow-y: auto; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
   .field { display: flex; flex-direction: column; gap: 4px; }
   .field label { font-size: 12px; font-weight: 650; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  .field input, .field select, .field textarea {
-    background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px;
-  }
+  .field input, .field select, .field textarea { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; }
   .alias-row { display: flex; gap: 8px; }
   .alias-row input { flex: 1; font-family: var(--mono); }
-  .modal-foot {
-    display: flex; gap: 10px; justify-content: flex-end; align-items: center;
-    padding: 14px 20px; border-top: 1px solid var(--line);
-  }
+  .modal-foot { display: flex; gap: 10px; justify-content: flex-end; align-items: center; padding: 14px 20px; border-top: 1px solid var(--line); }
   .modal-foot .left { margin-right: auto; }
 
   /* ---------- Notes ---------- */
@@ -205,31 +166,42 @@
   .notes h3 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
   .note-add { display: flex; gap: 8px; margin-bottom: 14px; }
   .note-add input { flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; }
-  .note {
-    border-left: 3px solid var(--accent); padding: 6px 12px; margin-bottom: 10px;
-    background: var(--surface-2); border-radius: 0 var(--radius) var(--radius) 0;
-  }
+  .note { border-left: 3px solid var(--accent); padding: 6px 12px; margin-bottom: 10px; background: var(--surface-2); border-radius: 0 var(--radius) var(--radius) 0; }
   .note time { display: block; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
   /* ---------- Login ---------- */
-  .login-overlay {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center; z-index: 50;
-  }
+  .login-overlay { position: fixed; inset: 0; background: var(--tinte); display: flex; align-items: center; justify-content: center; z-index: 50; }
   .login-card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-    box-shadow: var(--shadow); padding: 32px; width: min(360px, calc(100vw - 32px));
-    text-align: center;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    box-shadow: 0 30px 70px rgba(0,0,0,.4); padding: 34px 32px; width: min(370px, calc(100vw - 32px)); text-align: center;
   }
-  .login-card .logo { width: 56px; height: 56px; margin-bottom: 12px; }
-  .login-card h2 { margin: 0 0 4px; font-size: 16px; letter-spacing: .14em; text-transform: uppercase; }
-  .login-card p { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+  .login-card .mark { width: 44px; height: auto; margin: 0 auto 16px; color: var(--ink); }
+  .login-card h2 { margin: 0; font-family: var(--display); font-size: 20px; letter-spacing: .18em; }
+  .login-card .sub { font-family: var(--display); font-size: 9.5px; letter-spacing: .42em; color: var(--muted); margin: 4px 0 6px; }
+  .login-card p { color: var(--muted); font-size: 13px; margin: 0 0 20px; }
   .login-card input {
     width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 10px 12px; margin-bottom: 10px; text-align: center; font-family: var(--mono);
   }
   .login-card .err { color: var(--danger); font-size: 12.5px; min-height: 18px; margin: 4px 0 8px; }
   .login-card button { width: 100%; }
+
+  /* ---------- Ritterschilde ---------- */
+  .shields {
+    position: fixed; inset: 0; z-index: 90; display: flex;
+    align-items: center; justify-content: center; gap: clamp(14px, 4vw, 60px);
+    pointer-events: none; background: rgba(20,28,46,.55);
+    opacity: 0; transition: opacity .4s ease;
+  }
+  .shields.show { opacity: 1; }
+  .shields svg { width: clamp(120px, 24vw, 300px); height: auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,.55)); }
+  .shields svg { transform: scale(.35) rotate(-10deg); opacity: 0; transition: transform .5s cubic-bezier(.2,1.5,.4,1), opacity .3s ease; }
+  .shields.show svg { transform: none; opacity: 1; }
+  .shields.show svg:nth-child(2) { transition-delay: .1s; }
+  .shields.show svg:nth-child(3) { transition-delay: .2s; }
+  @media (prefers-reduced-motion: reduce) {
+    .shields svg { transform: none; transition: opacity .3s ease; }
+  }
 
   .toast {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -248,13 +220,15 @@
 
 <div class="login-overlay" id="login">
   <form class="login-card" id="loginForm">
-    <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult Logo">
-      <path d="M24 3 L43 10.5 V25 C43 35.8 35.2 42.6 24 46.5 C12.8 42.6 5 35.8 5 25 V10.5 Z" fill="#146C7A"/>
-      <path d="M15.5 16 L24 33 L32.5 16" fill="none" stroke="#fff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <svg class="mark" viewBox="0 0 96 116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult">
+      <path class="v" d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z"/>
+      <rect class="bar" x="0" y="105.6" width="95.6" height="10.4"/>
     </svg>
-    <h2>Vera Consult</h2>
-    <p>Kontaktregister &ndash; bitte Zugangscode eingeben</p>
-    <input type="password" id="loginPass" autocomplete="current-password" aria-label="Zugangscode" required>
+    <h2>VERA</h2>
+    <div class="sub">CONSULT</div>
+    <p>Interner Bereich &ndash; Anmeldung erforderlich</p>
+    <input type="text" id="loginUser" placeholder="Benutzername" autocomplete="username" aria-label="Benutzername" required spellcheck="false">
+    <input type="password" id="loginPass" placeholder="Zugangscode" autocomplete="current-password" aria-label="Zugangscode" required>
     <div class="err" id="loginErr"></div>
     <button class="btn primary" type="submit">Anmelden</button>
   </form>
@@ -263,14 +237,15 @@
 <div class="app" id="appRoot" hidden>
   <header class="top">
     <div class="brand">
-      <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult Logo">
-        <path class="shield" d="M24 3 L43 10.5 V25 C43 35.8 35.2 42.6 24 46.5 C12.8 42.6 5 35.8 5 25 V10.5 Z"/>
-        <path class="mark" d="M15.5 16 L24 33 L32.5 16" fill="none" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <svg class="mark" viewBox="0 0 96 116" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult">
+        <path class="v" d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z"/>
+        <rect class="bar" x="0" y="105.6" width="95.6" height="10.4"/>
       </svg>
-      <h1>Vera Consult<small>Sicherheits- &amp; Complianceberatung</small></h1>
+      <span class="brand-word"><b>VERA</b><span>CONSULT</span></span>
     </div>
-    <span class="sub">Kontaktregister &middot; Teilnehmer, Firmenkontakte, Trainer, Analysten</span>
+    <span class="sub">Kontaktregister</span>
     <span class="spacer"></span>
+    <span class="who">Angemeldet als <b id="whoName">&mdash;</b><button type="button" class="linkish" id="btnLogout">abmelden</button></span>
     <span class="conn" id="conn">Verbinde &hellip;</span>
   </header>
 
@@ -291,7 +266,34 @@
 
   <div class="stats" id="stats"></div>
   <main id="view"></main>
-  <p class="hint">Alle Eintr&auml;ge liegen zentral auf dem Server &ndash; &Auml;nderungen erscheinen bei allen Angemeldeten sofort. Export/Import dient nur noch als Sicherungskopie.</p>
+  <p class="hint">Alle Eintr&auml;ge liegen zentral auf dem Server &ndash; &Auml;nderungen erscheinen bei allen Angemeldeten sofort. Export/Import dient als Sicherungskopie.</p>
+</div>
+
+<div class="shields" id="shields" hidden aria-hidden="true">
+  <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 3 L96 17 V57 C96 87 74 108 50 117 C26 108 4 87 4 57 V17 Z" fill="#141C2E" stroke="#C2913A" stroke-width="4"/>
+    <path d="M50 11 L89 23 V57 C89 82 70 100 50 108 C30 100 11 82 11 57 V23 Z" fill="none" stroke="#C2913A" stroke-width="1.5" opacity=".55"/>
+    <g transform="translate(26 33) scale(0.5)">
+      <path d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z" fill="#FBFAF7"/>
+      <rect x="0" y="105.6" width="95.6" height="10.4" fill="#C2913A"/>
+    </g>
+  </svg>
+  <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 3 L96 17 V57 C96 87 74 108 50 117 C26 108 4 87 4 57 V17 Z" fill="#C2913A" stroke="#141C2E" stroke-width="4"/>
+    <path d="M50 11 L89 23 V57 C89 82 70 100 50 108 C30 100 11 82 11 57 V23 Z" fill="none" stroke="#141C2E" stroke-width="1.5" opacity=".45"/>
+    <g transform="translate(26 33) scale(0.5)">
+      <path d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z" fill="#141C2E"/>
+      <rect x="0" y="105.6" width="95.6" height="10.4" fill="#FBFAF7"/>
+    </g>
+  </svg>
+  <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 3 L96 17 V57 C96 87 74 108 50 117 C26 108 4 87 4 57 V17 Z" fill="#141C2E" stroke="#C2913A" stroke-width="4"/>
+    <path d="M50 11 L89 23 V57 C89 82 70 100 50 108 C30 100 11 82 11 57 V23 Z" fill="none" stroke="#C2913A" stroke-width="1.5" opacity=".55"/>
+    <g transform="translate(26 33) scale(0.5)">
+      <path d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z" fill="#FBFAF7"/>
+      <rect x="0" y="105.6" width="95.6" height="10.4" fill="#C2913A"/>
+    </g>
+  </svg>
 </div>
 
 <dialog id="modal">
@@ -375,17 +377,12 @@
   ];
 
   var state = {
-    entries: [],
-    view: "liste",
-    q: "",
-    fKat: "",
-    fStatus: "",
-    editingId: null,
+    entries: [], view: "liste", q: "", fKat: "", fStatus: "", editingId: null,
+    user: sessionStorage.getItem("kr-user") || "",
     token: sessionStorage.getItem("kr-token") || ""
   };
   var es = null;
 
-  /* ---------- helpers ---------- */
   function $(id) { return document.getElementById(id); }
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -423,9 +420,9 @@
   /* ---------- API ---------- */
   function api(pathname, opts) {
     opts = opts || {};
-    opts.headers = Object.assign({ "x-token": state.token }, opts.headers || {});
+    opts.headers = Object.assign({ "x-token": state.token, "x-user": state.user }, opts.headers || {});
     return fetch(pathname, opts).then(function (r) {
-      if (r.status === 401) { logout(); throw new Error("unauthorized"); }
+      if (r.status === 401) { logout(true); throw new Error("unauthorized"); }
       if (!r.ok) throw new Error("http " + r.status);
       return r.json();
     });
@@ -436,9 +433,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(entry)
     }).then(function (res) {
-      applyUpsert(res.entry);
-      render();
-      return res.entry;
+      applyUpsert(res.entry); render(); return res.entry;
     }).catch(function (e) {
       if (e.message !== "unauthorized") toast("Speichern fehlgeschlagen – Verbindung prüfen.");
       throw e;
@@ -448,8 +443,7 @@
     if (!entry) return;
     var idx = -1;
     for (var i = 0; i < state.entries.length; i++) if (state.entries[i].id === entry.id) { idx = i; break; }
-    if (idx === -1) state.entries.push(entry);
-    else state.entries[idx] = entry;
+    if (idx === -1) state.entries.push(entry); else state.entries[idx] = entry;
   }
   function applyDelete(id) {
     state.entries = state.entries.filter(function (e) { return e.id !== id; });
@@ -458,7 +452,7 @@
   /* ---------- SSE ---------- */
   function connectStream() {
     if (es) es.close();
-    es = new EventSource("/api/stream?token=" + encodeURIComponent(state.token));
+    es = new EventSource("/api/stream?user=" + encodeURIComponent(state.user) + "&token=" + encodeURIComponent(state.token));
     es.onopen = function () { setConn(true); };
     es.onerror = function () { setConn(false); };
     es.onmessage = function (ev) {
@@ -482,29 +476,48 @@
     if ($("modal").open && state.editingId === entry.id) renderNotes(entry);
   }
 
-  /* ---------- login ---------- */
-  function logout() {
+  /* ---------- Login ---------- */
+  function logout(expired) {
     sessionStorage.removeItem("kr-token");
-    state.token = "";
+    sessionStorage.removeItem("kr-user");
+    state.token = ""; state.user = ""; state.entries = [];
     if (es) { es.close(); es = null; }
     $("appRoot").hidden = true;
     $("login").hidden = false;
-    $("loginErr").textContent = "Sitzung abgelaufen oder Code falsch.";
-    $("loginPass").focus();
+    $("loginErr").textContent = expired ? "Sitzung abgelaufen. Bitte erneut anmelden." : "";
+    $("loginPass").value = "";
+    $("loginUser").focus();
   }
-  function tryLogin(pass) {
-    state.token = pass;
+  /* wiederherstellen = stille Anmeldung aus der Sitzung, ohne Begrüßung */
+  function tryLogin(user, pass, wiederherstellen) {
+    state.user = user; state.token = pass;
     return api("/api/entries").then(function (res) {
+      sessionStorage.setItem("kr-user", user);
       sessionStorage.setItem("kr-token", pass);
       state.entries = res.entries || [];
+      $("whoName").textContent = user;
       $("login").hidden = true;
       $("appRoot").hidden = false;
       connectStream();
       render();
+      if (!wiederherstellen && user.trim().toLowerCase() === "sinarius") ritterschilde();
     });
   }
 
-  /* ---------- filtering ---------- */
+  /* Begrüßung für Sinarius: kurz das normale Interface, dann drei Schilde */
+  function ritterschilde() {
+    var el = $("shields");
+    setTimeout(function () {
+      el.hidden = false;
+      requestAnimationFrame(function () { el.classList.add("show"); });
+      setTimeout(function () {
+        el.classList.remove("show");
+        setTimeout(function () { el.hidden = true; }, 500);
+      }, 2000);
+    }, 1000);
+  }
+
+  /* ---------- Filter ---------- */
   function filtered() {
     var q = state.q.trim().toLowerCase();
     return state.entries.filter(function (e) {
@@ -518,7 +531,7 @@
     });
   }
 
-  /* ---------- rendering ---------- */
+  /* ---------- Rendering ---------- */
   function renderStats() {
     var html = '<div class="stat"><b>' + state.entries.length + '</b><span>Einträge gesamt</span></div>';
     KATEGORIEN.forEach(function (k) {
@@ -601,16 +614,14 @@
           var newStatus = col.getAttribute("data-status");
           if (entry && entry.status !== newStatus) {
             var upd = Object.assign({}, entry, { status: newStatus, updatedAt: Date.now() });
-            pushEntry(upd).then(function () {
-              toast(upd.alias + " → " + statusById(newStatus).label);
-            });
+            pushEntry(upd).then(function () { toast(upd.alias + " → " + statusById(newStatus).label); });
           }
         });
       });
     }
   }
 
-  /* ---------- modal ---------- */
+  /* ---------- Modal ---------- */
   function fillSelect(sel, items) {
     items.forEach(function (it) {
       var o = document.createElement("option");
@@ -640,9 +651,7 @@
   function renderNotes(e) {
     var list = (e.notizen || []).slice().sort(function (a, b) { return b.ts - a.ts; });
     $("notesList").innerHTML = list.length
-      ? list.map(function (n) {
-          return '<div class="note"><time>' + fmtDate(n.ts) + '</time>' + esc(n.text) + '</div>';
-        }).join("")
+      ? list.map(function (n) { return '<div class="note"><time>' + fmtDate(n.ts) + '</time>' + esc(n.text) + '</div>'; }).join("")
       : '<p class="hint" style="margin:0">Noch keine Notizen.</p>';
   }
 
@@ -654,9 +663,7 @@
     if (dup) { toast("Alias-Code bereits vergeben."); return; }
     var tags = $("inTags").value.split(",").map(function (t) { return t.trim(); }).filter(Boolean);
     var now = Date.now();
-    var base = state.editingId
-      ? state.entries.find(function (x) { return x.id === state.editingId; })
-      : null;
+    var base = state.editingId ? state.entries.find(function (x) { return x.id === state.editingId; }) : null;
     var entry = {
       id: base ? base.id : uid(),
       alias: alias,
@@ -676,7 +683,7 @@
     });
   }
 
-  /* ---------- export / import ---------- */
+  /* ---------- Export / Import ---------- */
   function doExport() {
     if (state.entries.length === 0) { toast("Keine Einträge zum Exportieren."); return; }
     var payload = JSON.stringify({ app: "kontaktregister", version: 1, exportedAt: new Date().toISOString(), entries: state.entries }, null, 2);
@@ -712,7 +719,7 @@
     reader.readAsText(file);
   }
 
-  /* ---------- wiring ---------- */
+  /* ---------- Verdrahtung ---------- */
   fillSelect($("inKat"), KATEGORIEN);
   fillSelect($("inStatus"), STATUS);
   KATEGORIEN.forEach(function (k) {
@@ -728,13 +735,15 @@
 
   $("loginForm").addEventListener("submit", function (ev) {
     ev.preventDefault();
+    var user = $("loginUser").value.trim();
     var pass = $("loginPass").value;
-    if (!pass) return;
+    if (!user || !pass) return;
     $("loginErr").textContent = "";
-    tryLogin(pass).catch(function () {
-      $("loginErr").textContent = "Zugangscode falsch oder Server nicht erreichbar.";
+    tryLogin(user, pass).catch(function () {
+      $("loginErr").textContent = "Benutzername oder Zugangscode falsch.";
     });
   });
+  $("btnLogout").addEventListener("click", function () { logout(false); });
 
   $("tabListe").addEventListener("click", function () { state.view = "liste"; render(); });
   $("tabBoard").addEventListener("click", function () { state.view = "board"; render(); });
@@ -770,10 +779,7 @@
       notizen: (e.notizen || []).concat([{ ts: Date.now(), text: txt }]),
       updatedAt: Date.now()
     });
-    pushEntry(upd).then(function (saved) {
-      $("inNote").value = "";
-      renderNotes(saved);
-    });
+    pushEntry(upd).then(function (saved) { $("inNote").value = ""; renderNotes(saved); });
   });
   $("inNote").addEventListener("keydown", function (ev) {
     if (ev.key === "Enter") { ev.preventDefault(); $("btnAddNote").click(); }
@@ -785,14 +791,17 @@
     this.value = "";
   });
 
-  /* Auto-Login, wenn Token aus der Sitzung vorhanden */
-  if (state.token) {
-    tryLogin(state.token).catch(function () {
+  /* Automatische Anmeldung, wenn die Sitzung noch gültig ist */
+  if (state.user && state.token) {
+    var u = state.user, p = state.token;
+    tryLogin(u, p, true).catch(function () {
       sessionStorage.removeItem("kr-token");
-      state.token = "";
+      sessionStorage.removeItem("kr-user");
+      state.user = ""; state.token = "";
+      $("loginUser").focus();
     });
   } else {
-    $("loginPass").focus();
+    $("loginUser").focus();
   }
 })();
 </script>

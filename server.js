@@ -14,6 +14,8 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3112;
 const PASS = process.env.KONTAKTREGISTER_PASS || "vera-consult-2026";
+/* Zugelassene Benutzernamen – gemeinsames Passwort (PASS) */
+const USERS = ["Sinarius", "Brukulus"];
 const DATA_FILE = path.join(__dirname, "data.json");
 const SITE_FILE = path.join(__dirname, "website.html");
 const APP_FILE = path.join(__dirname, "index.html");
@@ -84,7 +86,9 @@ function broadcast(event) {
 /* ---------- HTTP ---------- */
 function authed(req, url) {
   const token = req.headers["x-token"] || url.searchParams.get("token") || "";
-  return token === PASS;
+  const user = String(req.headers["x-user"] || url.searchParams.get("user") || "");
+  const known = USERS.some(u => u.toLowerCase() === user.trim().toLowerCase());
+  return known && token === PASS;
 }
 function json(res, code, obj) {
   res.writeHead(code, { "Content-Type": "application/json; charset=utf-8" });
@@ -134,7 +138,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   if (url.pathname.startsWith("/api/")) {
-    if (!authed(req, url)) { json(res, 401, { error: "Zugangscode falsch." }); return; }
+    if (!authed(req, url)) { json(res, 401, { error: "Benutzername oder Zugangscode falsch." }); return; }
 
     if (req.method === "GET" && url.pathname === "/api/entries") {
       json(res, 200, { entries });
@@ -189,5 +193,6 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, () => {
   console.log("Kontaktregister läuft auf http://localhost:" + PORT);
+  console.log("Benutzer: " + USERS.join(", "));
   console.log("Zugangscode: " + (process.env.KONTAKTREGISTER_PASS ? "(aus Umgebungsvariable)" : PASS));
 });
