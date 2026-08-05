@@ -1,0 +1,5 @@
+# Registerdaten niemals ins Repository – enthält Arbeitsdaten
+data.json
+
+node_modules/
+*.log

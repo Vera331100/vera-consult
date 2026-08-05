@@ -1,0 +1,13 @@
+{
+  "name": "vera-consult",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vera Consult – Website und internes Kontaktregister",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

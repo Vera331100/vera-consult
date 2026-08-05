@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vera Consult – Sicherheits- und Complianceberatung für Unternehmen und öffentliche Auftraggeber. Interne Ermittlungen, Geldwäscheprävention, Krisenmanagement, Schulungen.">
+<title>Vera Consult · Sicherheits- &amp; Complianceberatung</title>
+<style>
+  :root {
+    --ink: #0F1720;
+    --ink-2: #16212C;
+    --paper: #F6F7F5;
+    --paper-2: #ECEEEA;
+    --petrol: #146C7A;
+    --petrol-bright: #2FA3B5;
+    --petrol-deep: #0C4A54;
+    --muted: #5E6B76;
+    --muted-dark: #93A4B2;
+    --line: #DDE1DC;
+    --line-dark: #253240;
+    --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif;
+    --mono: "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.65;
+  }
+  a { color: var(--petrol); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--petrol-bright); outline-offset: 3px; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    font-family: var(--display); font-size: 12.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: .28em; color: var(--petrol);
+    display: flex; align-items: center; gap: 14px; margin: 0 0 18px;
+  }
+  .eyebrow::before { content: ""; width: 34px; height: 2px; background: var(--petrol); flex: none; }
+
+  h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--ink) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .nav-in {
+    display: flex; align-items: center; gap: 14px;
+    max-width: 1100px; margin: 0 auto; padding: 14px 24px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 11px; color: #fff; }
+  .nav-brand:hover { text-decoration: none; }
+  .nav-brand svg { width: 32px; height: 32px; }
+  .nav-brand b {
+    font-family: var(--display); font-size: 15px; font-weight: 600;
+    letter-spacing: .2em; text-transform: uppercase;
+  }
+  .nav-links { margin-left: auto; display: flex; gap: 26px; }
+  .nav-links a {
+    color: var(--muted-dark); font-size: 14px; font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .nav-links a:hover { color: #fff; text-decoration: none; }
+  @media (max-width: 640px) { .nav-links { gap: 16px; } .nav-links a:nth-child(n+4) { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--petrol-deep) 26%, transparent), transparent 55%),
+      repeating-linear-gradient(115deg, transparent 0 46px, rgba(47,163,181,.05) 46px 47px),
+      var(--ink);
+    color: #fff;
+    padding: 110px 0 100px;
+    border-bottom: 4px solid var(--petrol);
+  }
+  .hero .eyebrow { color: var(--petrol-bright); }
+  .hero .eyebrow::before { background: var(--petrol-bright); }
+  .hero h1 {
+    font-size: clamp(38px, 6.2vw, 66px); font-weight: 700;
+    letter-spacing: -.012em; max-width: 15ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--petrol-bright); }
+  .hero p.lede {
+    max-width: 58ch; font-size: 18.5px; color: var(--muted-dark);
+    margin: 26px 0 38px;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; font-family: var(--display); font-weight: 600;
+    font-size: 15px; letter-spacing: .05em; padding: 13px 26px;
+    border-radius: 4px; border: 1px solid transparent;
+  }
+  .btn:hover { text-decoration: none; }
+  .btn.solid { background: var(--petrol-bright); color: var(--ink); }
+  .btn.solid:hover { filter: brightness(1.1); }
+  .btn.ghost { border-color: var(--line-dark); color: #fff; }
+  .btn.ghost:hover { border-color: var(--petrol-bright); color: var(--petrol-bright); }
+
+  .hero-facts {
+    display: flex; flex-wrap: wrap; gap: 0 48px; margin-top: 64px;
+    border-top: 1px solid var(--line-dark); padding-top: 26px;
+  }
+  .fact { padding: 4px 0; }
+  .fact b { font-family: var(--display); font-size: 15px; display: block; color: #fff; letter-spacing: .04em; }
+  .fact span { font-size: 13.5px; color: var(--muted-dark); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 90px 0; }
+  section h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 700; max-width: 24ch; }
+  .section-intro { max-width: 62ch; color: var(--muted); margin: 18px 0 0; }
+
+  /* Leistungen */
+  #leistungen { background: var(--paper); }
+  .services {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 26px; margin-top: 50px;
+  }
+  .service {
+    background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--petrol);
+    padding: 26px 26px 22px; border-radius: 4px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .service h3 { font-size: 18.5px; font-weight: 650; letter-spacing: .01em; }
+  .service p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  .service ul { margin: 4px 0 0; padding-left: 18px; font-size: 14px; color: var(--muted); }
+  .service li { margin-bottom: 3px; }
+
+  /* Zielgruppen */
+  #zielgruppen { background: var(--ink); color: #fff; }
+  #zielgruppen h2 { color: #fff; }
+  .aud { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
+  @media (max-width: 760px) { .aud { grid-template-columns: 1fr; } }
+  .aud-col {
+    border-left: 3px solid var(--petrol-bright); padding-left: 26px;
+  }
+  .aud-col h3 {
+    font-size: 14px; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--petrol-bright); margin-bottom: 14px; font-weight: 600;
+  }
+  .aud-col p { color: var(--muted-dark); margin: 0 0 12px; font-size: 15px; }
+  .aud-col ul { margin: 0; padding-left: 18px; color: var(--muted-dark); font-size: 14.5px; }
+  .aud-col li { margin-bottom: 5px; }
+
+  /* Ansatz */
+  #ansatz { background: var(--paper-2); }
+  .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 36px; margin-top: 50px; }
+  .principle h3 { font-size: 17px; font-weight: 650; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+  .principle h3::before {
+    content: ""; width: 9px; height: 9px; background: var(--petrol); flex: none;
+  }
+  .principle p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+  /* Kontakt */
+  #kontakt { background: var(--paper); }
+  .contact-card {
+    margin-top: 44px; background: var(--ink); color: #fff; border-radius: 6px;
+    padding: 44px; display: flex; flex-wrap: wrap; gap: 30px 60px;
+    align-items: center; justify-content: space-between;
+    border-left: 5px solid var(--petrol-bright);
+  }
+  .contact-card h3 { font-size: 24px; font-weight: 700; max-width: 18ch; }
+  .contact-card p { color: var(--muted-dark); margin: 8px 0 0; max-width: 48ch; font-size: 14.5px; }
+  .contact-meta { font-size: 15px; }
+  .contact-meta a { color: var(--petrol-bright); font-family: var(--mono); font-size: 14.5px; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--ink); color: var(--muted-dark);
+    border-top: 1px solid var(--line-dark);
+    padding: 34px 0; font-size: 13px;
+  }
+  .foot-in {
+    max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    display: flex; flex-wrap: wrap; gap: 10px 30px; align-items: center;
+  }
+  .foot-in .spacer { flex: 1; }
+  footer a { color: var(--muted-dark); }
+  footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<nav aria-label="Hauptnavigation">
+  <div class="nav-in">
+    <a class="nav-brand" href="#top" aria-label="Vera Consult – zum Seitenanfang">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M24 3 L43 10.5 V25 C43 35.8 35.2 42.6 24 46.5 C12.8 42.6 5 35.8 5 25 V10.5 Z" fill="#2FA3B5"/>
+        <path d="M15.5 16 L24 33 L32.5 16" fill="none" stroke="#0F1720" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <b>Vera Consult</b>
+    </a>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#zielgruppen">Auftraggeber</a>
+      <a href="#ansatz">Ansatz</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Sicherheits- &amp; Complianceberatung</p>
+    <h1>Ermittlungs&shy;praxis, auf die sich <em>Entscheider</em> verlassen.</h1>
+    <p class="lede">
+      Vera Consult berät Unternehmen und öffentliche Auftraggeber bei internen Ermittlungen,
+      Geldwäscheprävention und Krisenlagen &ndash; mit Methoden aus der kriminalistischen Praxis,
+      übersetzt in die Sprache und die Rechtslage der Wirtschaft.
+    </p>
+    <div class="cta-row">
+      <a class="btn solid" href="#kontakt">Gespräch anfragen</a>
+      <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><b>B2B &amp; B2G</b><span>Wirtschaft und öffentliche Hand</span></div>
+      <div class="fact"><b>Diskretion</b><span>Vertraulichkeit als Arbeitsprinzip</span></div>
+      <div class="fact"><b>International</b><span>Schwerpunkt Türkei / MENA-Region</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="leistungen">
+  <div class="wrap">
+    <p class="eyebrow">Leistungen</p>
+    <h2>Fünf Felder, ein Maßstab: belastbare Ergebnisse.</h2>
+    <p class="section-intro">
+      Jedes Mandat beginnt mit einer nüchternen Lagebeurteilung &ndash; und endet mit
+      Ergebnissen, die vor Geschäftsleitung, Aufsicht und im Zweifel vor Gericht bestehen.
+    </p>
+    <div class="services">
+      <article class="service">
+        <h3>Interne Ermittlungen &amp; Fraud</h3>
+        <p>Unternehmensinterne Untersuchungen bei Verdacht auf Betrug, Untreue oder Korruption.</p>
+        <ul>
+          <li>Beweissicherung und Dokumentation</li>
+          <li>Interviewführung mit Beteiligten</li>
+          <li>Innentäter-Muster und Prävention</li>
+        </ul>
+      </article>
+      <article class="service">
+        <h3>Geldwäscheprävention</h3>
+        <p>Praxisnahe Umsetzung der GwG-Pflichten &ndash; über den Gesetzestext hinaus.</p>
+        <ul>
+          <li>Typologien und Fallmuster aus der Praxis</li>
+          <li>Risikoanalyse für Verpflichtete</li>
+          <li>Mitarbeiterschulungen nach § 6 GwG</li>
+        </ul>
+      </article>
+      <article class="service">
+        <h3>Krisenmanagement &amp; Stabsarbeit</h3>
+        <p>Führung in Ausnahmelagen &ndash; strukturiert, geübt, entscheidungsfähig.</p>
+        <ul>
+          <li>Aufbau und Training von Krisenstäben</li>
+          <li>Bedrohungsmanagement</li>
+          <li>Entscheiden unter Druck</li>
+        </ul>
+      </article>
+      <article class="service">
+        <h3>Due Diligence Türkei / MENA</h3>
+        <p>Geschäftspartner- und Standortprüfung mit echter Regionalexpertise.</p>
+        <ul>
+          <li>Integritätsprüfung von Partnern</li>
+          <li>Betrugsmuster im Auslandsgeschäft</li>
+          <li>Reisesicherheit und Landeskunde</li>
+        </ul>
+      </article>
+      <article class="service">
+        <h3>Schulungen &amp; Vorträge</h3>
+        <p>Seminare und Keynotes von Praktikern &ndash; fallbasiert statt folienlastig.</p>
+        <ul>
+          <li>Interviewtechniken für Compliance-Teams</li>
+          <li>Führungskräftetraining Krisenlagen</li>
+          <li>Fachvorträge und Tagungsbeiträge</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="zielgruppen">
+  <div class="wrap">
+    <p class="eyebrow">Auftraggeber</p>
+    <h2>Für Wirtschaft und öffentliche Hand.</h2>
+    <div class="aud">
+      <div class="aud-col">
+        <h3>B2B &middot; Unternehmen</h3>
+        <p>Vom Mittelstand bis zum Konzern &ndash; überall dort, wo Compliance-, Betrugs- oder Sicherheitsfragen Führungsentscheidungen verlangen.</p>
+        <ul>
+          <li>Compliance- und Revisionsabteilungen</li>
+          <li>Konzernsicherheit und Risk Management</li>
+          <li>Banken, Zahlungsdienstleister, GwG-Verpflichtete</li>
+          <li>Unternehmen mit Türkei- und Auslandsgeschäft</li>
+        </ul>
+      </div>
+      <div class="aud-col">
+        <h3>B2G &middot; Öffentliche Auftraggeber</h3>
+        <p>Verwaltung und öffentliche Einrichtungen unterstützen wir mit Fortbildung und Beratung &ndash; transparent, dokumentiert und vergabekonform.</p>
+        <ul>
+          <li>Fortbildungen für Verwaltung und Einrichtungen</li>
+          <li>Korruptionsprävention und Integrität</li>
+          <li>Krisenorganisation und Übungen</li>
+          <li>Fachvorträge und Gastreferate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ansatz">
+  <div class="wrap">
+    <p class="eyebrow">Ansatz</p>
+    <h2>Drei Prinzipien, ohne Ausnahme.</h2>
+    <div class="principles">
+      <div class="principle">
+        <h3>Praxis vor Theorie</h3>
+        <p>Unsere Berater kommen aus der operativen Ermittlungs- und Führungspraxis. Wir schulen nichts, was wir nicht selbst verantwortet haben.</p>
+      </div>
+      <div class="principle">
+        <h3>Diskretion mit System</h3>
+        <p>Vertraulichkeit ist bei uns kein Versprechen, sondern Arbeitsweise: klare Vertraulichkeitsvereinbarungen, anonymisierte Fallarbeit, saubere Datenhaltung.</p>
+      </div>
+      <div class="principle">
+        <h3>Transparenz gegenüber Auftraggebern</h3>
+        <p>Wer uns beauftragt, kennt unsere Herkunft, unsere Methoden und unsere Grenzen. Wir arbeiten ausschließlich im Rahmen des deutschen Rechts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <p class="eyebrow">Kontakt</p>
+    <h2>Der erste Schritt ist ein Gespräch.</h2>
+    <div class="contact-card">
+      <div>
+        <h3>Schildern Sie uns Ihre Lage &ndash; vertraulich.</h3>
+        <p>Erstgespräche sind unverbindlich. Sie erreichen uns per E-Mail; wir melden uns in der Regel innerhalb eines Werktags.</p>
+      </div>
+      <div class="contact-meta">
+        <a href="mailto:kontakt@vera-consult.de">kontakt@vera-consult.de</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span>&copy; 2026 Vera Consult &middot; Sicherheits- &amp; Complianceberatung</span>
+    <span class="spacer"></span>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+  </div>
+</footer>
+
+</body>
+</html>

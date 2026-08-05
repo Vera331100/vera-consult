@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vera Consult · Kontaktregister</title>
+<style>
+  :root {
+    --bg: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface-2: #EEF1F4;
+    --ink: #1A2129;
+    --muted: #5C6B7A;
+    --line: #DDE3EA;
+    --accent: #146C7A;
+    --accent-soft: #E3F0F2;
+    --accent-ink: #FFFFFF;
+    --danger: #B3423A;
+    --ok: #2E8B57;
+    --shadow: 0 1px 3px rgba(16,24,32,.08), 0 4px 16px rgba(16,24,32,.06);
+    --radius: 8px;
+    --mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+    --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161B;
+      --surface: #1A2129;
+      --surface-2: #212A34;
+      --ink: #E8EDF2;
+      --muted: #8CA0B3;
+      --line: #2A3441;
+      --accent: #3FB6C9;
+      --accent-soft: #16323A;
+      --accent-ink: #0C1418;
+      --danger: #E07B74;
+      --ok: #6FBF94;
+      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+  button { font-family: inherit; font-size: inherit; cursor: pointer; }
+  input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .app { max-width: 1180px; margin: 0 auto; padding: 20px 20px 60px; }
+
+  /* ---------- Header ---------- */
+  header.top {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px;
+    padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 13px; }
+  .brand .logo { width: 42px; height: 42px; flex: none; }
+  .brand .logo .shield { fill: var(--accent); }
+  .brand .logo .mark { stroke: var(--accent-ink); }
+  header.top h1 {
+    font-size: 18px; font-weight: 700; margin: 0;
+    letter-spacing: .18em; text-transform: uppercase;
+  }
+  header.top h1 small {
+    display: block; font-size: 10.5px; font-weight: 650; letter-spacing: .22em;
+    color: var(--muted); margin-top: 1px;
+  }
+  header.top .sub { color: var(--muted); font-size: 13px; }
+  header.top .spacer { flex: 1; }
+  .conn {
+    font-size: 12px; color: var(--muted);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .conn::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--danger); flex: none;
+  }
+  .conn.online::before { background: var(--ok); }
+
+  /* ---------- Toolbar ---------- */
+  .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+  .tabs { display: inline-flex; background: var(--surface-2); border-radius: var(--radius); padding: 3px; gap: 2px; }
+  .tabs button {
+    border: 0; background: transparent; color: var(--muted);
+    padding: 6px 14px; border-radius: 6px; font-weight: 600;
+  }
+  .tabs button[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+  .toolbar input[type="search"], .toolbar select {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 7px 10px; min-width: 0;
+  }
+  .toolbar input[type="search"] { flex: 1 1 180px; }
+  .toolbar .spacer { flex: 0 0 0; margin-left: auto; }
+  .btn {
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: var(--radius); padding: 7px 14px; font-weight: 600;
+  }
+  .btn:hover { border-color: var(--muted); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.danger { color: var(--danger); }
+
+  /* ---------- Stats ---------- */
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 8px 14px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .stat b { font-size: 18px; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--muted); font-size: 12.5px; }
+
+  /* ---------- Chips ---------- */
+  .chip {
+    display: inline-block; padding: 2px 9px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+    border: 1px solid transparent;
+  }
+  .chip.kat { background: var(--accent-soft); color: var(--accent); }
+  .chip.st-neu        { background: #64748B22; color: #64748B; border-color: #64748B44; }
+  .chip.st-kontakt    { background: #2F6FB222; color: #2F6FB2; border-color: #2F6FB244; }
+  .chip.st-gespraech  { background: #B7732422; color: #B77324; border-color: #B7732444; }
+  .chip.st-cv         { background: #1C8E9E22; color: #1C8E9E; border-color: #1C8E9E44; }
+  .chip.st-aktiv      { background: #2E8B5722; color: #2E8B57; border-color: #2E8B5744; }
+  .chip.st-abgeschlossen { background: #7A5EA822; color: #7A5EA8; border-color: #7A5EA844; }
+  @media (prefers-color-scheme: dark) {
+    .chip.st-neu       { color: #94A3B8; }
+    .chip.st-kontakt   { color: #7FAEDD; }
+    .chip.st-gespraech { color: #D9A05B; }
+    .chip.st-cv        { color: #56C4D2; }
+    .chip.st-aktiv     { color: #6FBF94; }
+    .chip.st-abgeschlossen { color: #A98FD6; }
+  }
+
+  .alias { font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+
+  /* ---------- List view ---------- */
+  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  table { width: 100%; border-collapse: collapse; min-width: 760px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); font-weight: 650; background: var(--surface-2);
+  }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: var(--surface-2); }
+  tbody tr:last-child td { border-bottom: 0; }
+  td .muted { color: var(--muted); font-size: 13px; }
+  .empty { padding: 48px 20px; text-align: center; color: var(--muted); }
+
+  /* ---------- Board view ---------- */
+  .board { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; align-items: flex-start; }
+  .col {
+    flex: 0 0 240px; background: var(--surface-2); border-radius: var(--radius);
+    padding: 10px; min-height: 120px;
+  }
+  .col h3 {
+    margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); display: flex; justify-content: space-between; font-weight: 650;
+  }
+  .col h3 b { font-variant-numeric: tabular-nums; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 10px 12px; margin-bottom: 8px; cursor: grab; box-shadow: var(--shadow);
+  }
+  .card:active { cursor: grabbing; }
+  .card .alias { display: block; margin-bottom: 4px; }
+  .card .meta { font-size: 12.5px; color: var(--muted); }
+  .col.dragover { outline: 2px dashed var(--accent); outline-offset: -4px; }
+
+  /* ---------- Modal ---------- */
+  dialog {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink);
+    width: min(680px, calc(100vw - 32px)); padding: 0; box-shadow: var(--shadow);
+  }
+  dialog::backdrop { background: rgba(10,14,18,.45); }
+  .modal-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--line);
+  }
+  .modal-head h2 { margin: 0; font-size: 16px; }
+  .modal-body { padding: 20px; max-height: 70vh; overflow-y: auto; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; font-weight: 650; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .field input, .field select, .field textarea {
+    background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px;
+  }
+  .alias-row { display: flex; gap: 8px; }
+  .alias-row input { flex: 1; font-family: var(--mono); }
+  .modal-foot {
+    display: flex; gap: 10px; justify-content: flex-end; align-items: center;
+    padding: 14px 20px; border-top: 1px solid var(--line);
+  }
+  .modal-foot .left { margin-right: auto; }
+
+  /* ---------- Notes ---------- */
+  .notes { margin-top: 22px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .notes h3 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  .note-add { display: flex; gap: 8px; margin-bottom: 14px; }
+  .note-add input { flex: 1; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px 10px; }
+  .note {
+    border-left: 3px solid var(--accent); padding: 6px 12px; margin-bottom: 10px;
+    background: var(--surface-2); border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .note time { display: block; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* ---------- Login ---------- */
+  .login-overlay {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; z-index: 50;
+  }
+  .login-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: var(--shadow); padding: 32px; width: min(360px, calc(100vw - 32px));
+    text-align: center;
+  }
+  .login-card .logo { width: 56px; height: 56px; margin-bottom: 12px; }
+  .login-card h2 { margin: 0 0 4px; font-size: 16px; letter-spacing: .14em; text-transform: uppercase; }
+  .login-card p { color: var(--muted); font-size: 13px; margin: 0 0 18px; }
+  .login-card input {
+    width: 100%; background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 10px 12px; margin-bottom: 10px; text-align: center; font-family: var(--mono);
+  }
+  .login-card .err { color: var(--danger); font-size: 12.5px; min-height: 18px; margin: 4px 0 8px; }
+  .login-card button { width: 100%; }
+
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--bg); padding: 9px 18px; border-radius: 20px;
+    font-size: 13.5px; font-weight: 600; box-shadow: var(--shadow); opacity: 0;
+    transition: opacity .2s; pointer-events: none; z-index: 99;
+  }
+  .toast.show { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+
+  .hint { font-size: 12.5px; color: var(--muted); margin-top: 14px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="login-overlay" id="login">
+  <form class="login-card" id="loginForm">
+    <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult Logo">
+      <path d="M24 3 L43 10.5 V25 C43 35.8 35.2 42.6 24 46.5 C12.8 42.6 5 35.8 5 25 V10.5 Z" fill="#146C7A"/>
+      <path d="M15.5 16 L24 33 L32.5 16" fill="none" stroke="#fff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h2>Vera Consult</h2>
+    <p>Kontaktregister &ndash; bitte Zugangscode eingeben</p>
+    <input type="password" id="loginPass" autocomplete="current-password" aria-label="Zugangscode" required>
+    <div class="err" id="loginErr"></div>
+    <button class="btn primary" type="submit">Anmelden</button>
+  </form>
+</div>
+
+<div class="app" id="appRoot" hidden>
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vera Consult Logo">
+        <path class="shield" d="M24 3 L43 10.5 V25 C43 35.8 35.2 42.6 24 46.5 C12.8 42.6 5 35.8 5 25 V10.5 Z"/>
+        <path class="mark" d="M15.5 16 L24 33 L32.5 16" fill="none" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>Vera Consult<small>Sicherheits- &amp; Complianceberatung</small></h1>
+    </div>
+    <span class="sub">Kontaktregister &middot; Teilnehmer, Firmenkontakte, Trainer, Analysten</span>
+    <span class="spacer"></span>
+    <span class="conn" id="conn">Verbinde &hellip;</span>
+  </header>
+
+  <div class="toolbar">
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tabListe" aria-selected="true">Liste</button>
+      <button role="tab" id="tabBoard" aria-selected="false">Board</button>
+    </div>
+    <input type="search" id="q" placeholder="Suchen (Alias, Branche, Rolle, Notizen) &hellip;" aria-label="Suche">
+    <select id="fKat" aria-label="Kategorie filtern"><option value="">Alle Kategorien</option></select>
+    <select id="fStatus" aria-label="Status filtern"><option value="">Alle Status</option></select>
+    <span class="spacer"></span>
+    <button class="btn" id="btnExport">Export</button>
+    <button class="btn" id="btnImport">Import</button>
+    <input type="file" id="fileImport" accept=".json,application/json" hidden>
+    <button class="btn primary" id="btnNew">+ Neuer Eintrag</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+  <main id="view"></main>
+  <p class="hint">Alle Eintr&auml;ge liegen zentral auf dem Server &ndash; &Auml;nderungen erscheinen bei allen Angemeldeten sofort. Export/Import dient nur noch als Sicherungskopie.</p>
+</div>
+
+<dialog id="modal">
+  <form method="dialog" id="entryForm">
+    <div class="modal-head">
+      <h2 id="modalTitle">Neuer Eintrag</h2>
+      <button type="button" class="btn" id="btnClose" aria-label="Schlie&szlig;en">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="grid2">
+        <div class="field">
+          <label for="inAlias">Alias-Code</label>
+          <div class="alias-row">
+            <input id="inAlias" required maxlength="24" autocomplete="off" spellcheck="false">
+            <button type="button" class="btn" id="btnGenAlias" title="Neuen Alias erzeugen">&#8635;</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="inKat">Kategorie</label>
+          <select id="inKat"></select>
+        </div>
+        <div class="field">
+          <label for="inStatus">Status</label>
+          <select id="inStatus"></select>
+        </div>
+        <div class="field">
+          <label for="inOrg">Organisationstyp</label>
+          <input id="inOrg" maxlength="60" placeholder="z. B. Bank, Akademie, Mittelstand" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="inBranche">Branche</label>
+          <input id="inBranche" maxlength="60" placeholder="z. B. Finanzen, Logistik" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="inRolle">Rolle / Fachgebiet</label>
+          <input id="inRolle" maxlength="80" placeholder="z. B. Compliance Officer, Fraud-Analyst" autocomplete="off">
+        </div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label for="inTags">Schlagworte (kommagetrennt)</label>
+        <input id="inTags" maxlength="120" placeholder="z. B. GwG, T&uuml;rkei, Keynote" autocomplete="off">
+      </div>
+
+      <div class="notes" id="notesBlock" hidden>
+        <h3>Verlauf</h3>
+        <div class="note-add">
+          <input id="inNote" placeholder="Neue Notiz &hellip;" maxlength="500">
+          <button type="button" class="btn" id="btnAddNote">Hinzuf&uuml;gen</button>
+        </div>
+        <div id="notesList"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn danger left" id="btnDelete" hidden>L&ouml;schen</button>
+      <button type="button" class="btn" id="btnCancel">Abbrechen</button>
+      <button type="submit" class="btn primary" id="btnSave">Speichern</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KATEGORIEN = [
+    { id: "teilnehmer",    label: "Teilnehmer",    prefix: "TN" },
+    { id: "firmenkontakt", label: "Firmenkontakt", prefix: "FK" },
+    { id: "trainer",       label: "Trainer",       prefix: "TR" },
+    { id: "analyst",       label: "Analyst",       prefix: "AN" },
+    { id: "sonstige",      label: "Sonstige",      prefix: "SO" }
+  ];
+  var STATUS = [
+    { id: "neu",           label: "Neu" },
+    { id: "kontakt",       label: "In Kontakt" },
+    { id: "gespraech",     label: "In Gespräch" },
+    { id: "cv",            label: "CV-Verifizierung" },
+    { id: "aktiv",         label: "Aktiv" },
+    { id: "abgeschlossen", label: "Abgeschlossen" }
+  ];
+
+  var state = {
+    entries: [],
+    view: "liste",
+    q: "",
+    fKat: "",
+    fStatus: "",
+    editingId: null,
+    token: sessionStorage.getItem("kr-token") || ""
+  };
+  var es = null;
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function uid() { return Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8); }
+  function katById(id) {
+    for (var i = 0; i < KATEGORIEN.length; i++) if (KATEGORIEN[i].id === id) return KATEGORIEN[i];
+    return KATEGORIEN[KATEGORIEN.length - 1];
+  }
+  function statusById(id) {
+    for (var i = 0; i < STATUS.length; i++) if (STATUS[i].id === id) return STATUS[i];
+    return STATUS[0];
+  }
+  function genAlias(katId) {
+    var hex = "";
+    for (var i = 0; i < 4; i++) hex += "0123456789ABCDEF"[Math.floor(Math.random() * 16)];
+    return katById(katId).prefix + "-" + hex;
+  }
+  function fmtDate(ts) {
+    var d = new Date(ts);
+    return d.toLocaleDateString("de-DE", { year: "numeric", month: "2-digit", day: "2-digit" }) +
+      " " + d.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" });
+  }
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2600);
+  }
+
+  /* ---------- API ---------- */
+  function api(pathname, opts) {
+    opts = opts || {};
+    opts.headers = Object.assign({ "x-token": state.token }, opts.headers || {});
+    return fetch(pathname, opts).then(function (r) {
+      if (r.status === 401) { logout(); throw new Error("unauthorized"); }
+      if (!r.ok) throw new Error("http " + r.status);
+      return r.json();
+    });
+  }
+  function pushEntry(entry) {
+    return api("/api/entries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(entry)
+    }).then(function (res) {
+      applyUpsert(res.entry);
+      render();
+      return res.entry;
+    }).catch(function (e) {
+      if (e.message !== "unauthorized") toast("Speichern fehlgeschlagen – Verbindung prüfen.");
+      throw e;
+    });
+  }
+  function applyUpsert(entry) {
+    if (!entry) return;
+    var idx = -1;
+    for (var i = 0; i < state.entries.length; i++) if (state.entries[i].id === entry.id) { idx = i; break; }
+    if (idx === -1) state.entries.push(entry);
+    else state.entries[idx] = entry;
+  }
+  function applyDelete(id) {
+    state.entries = state.entries.filter(function (e) { return e.id !== id; });
+  }
+
+  /* ---------- SSE ---------- */
+  function connectStream() {
+    if (es) es.close();
+    es = new EventSource("/api/stream?token=" + encodeURIComponent(state.token));
+    es.onopen = function () { setConn(true); };
+    es.onerror = function () { setConn(false); };
+    es.onmessage = function (ev) {
+      try {
+        var msg = JSON.parse(ev.data);
+        if (msg.type === "upsert") { applyUpsert(msg.entry); render(); refreshOpenModal(msg.entry); }
+        if (msg.type === "delete") {
+          applyDelete(msg.id);
+          if (state.editingId === msg.id && $("modal").open) { $("modal").close(); toast("Eintrag wurde von der Gegenseite gelöscht."); }
+          render();
+        }
+      } catch (e) { /* ignorieren */ }
+    };
+  }
+  function setConn(online) {
+    var c = $("conn");
+    c.classList.toggle("online", online);
+    c.textContent = online ? "Live verbunden" : "Verbindung getrennt – versuche erneut …";
+  }
+  function refreshOpenModal(entry) {
+    if ($("modal").open && state.editingId === entry.id) renderNotes(entry);
+  }
+
+  /* ---------- login ---------- */
+  function logout() {
+    sessionStorage.removeItem("kr-token");
+    state.token = "";
+    if (es) { es.close(); es = null; }
+    $("appRoot").hidden = true;
+    $("login").hidden = false;
+    $("loginErr").textContent = "Sitzung abgelaufen oder Code falsch.";
+    $("loginPass").focus();
+  }
+  function tryLogin(pass) {
+    state.token = pass;
+    return api("/api/entries").then(function (res) {
+      sessionStorage.setItem("kr-token", pass);
+      state.entries = res.entries || [];
+      $("login").hidden = true;
+      $("appRoot").hidden = false;
+      connectStream();
+      render();
+    });
+  }
+
+  /* ---------- filtering ---------- */
+  function filtered() {
+    var q = state.q.trim().toLowerCase();
+    return state.entries.filter(function (e) {
+      if (state.fKat && e.kategorie !== state.fKat) return false;
+      if (state.fStatus && e.status !== state.fStatus) return false;
+      if (!q) return true;
+      var hay = [e.alias, e.branche, e.rolle, e.org, (e.tags || []).join(" ")]
+        .concat((e.notizen || []).map(function (n) { return n.text; }))
+        .join(" ").toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+  }
+
+  /* ---------- rendering ---------- */
+  function renderStats() {
+    var html = '<div class="stat"><b>' + state.entries.length + '</b><span>Einträge gesamt</span></div>';
+    KATEGORIEN.forEach(function (k) {
+      var n = state.entries.filter(function (e) { return e.kategorie === k.id; }).length;
+      if (n > 0) html += '<div class="stat"><b>' + n + '</b><span>' + esc(k.label) + '</span></div>';
+    });
+    $("stats").innerHTML = html;
+  }
+
+  function renderList(list) {
+    if (list.length === 0) {
+      return '<div class="table-wrap"><div class="empty">Keine Einträge gefunden.<br>Lege mit &bdquo;+ Neuer Eintrag&ldquo; den ersten an.</div></div>';
+    }
+    var rows = list.map(function (e) {
+      return '<tr data-id="' + esc(e.id) + '" tabindex="0" role="button" aria-label="Eintrag ' + esc(e.alias) + ' öffnen">' +
+        '<td><span class="alias">' + esc(e.alias) + '</span></td>' +
+        '<td><span class="chip kat">' + esc(katById(e.kategorie).label) + '</span></td>' +
+        '<td><span class="chip st-' + esc(e.status) + '">' + esc(statusById(e.status).label) + '</span></td>' +
+        '<td>' + esc(e.rolle || "—") + '</td>' +
+        '<td>' + esc(e.branche || "—") + '</td>' +
+        '<td>' + esc(e.org || "—") + '</td>' +
+        '<td class="muted">' + ((e.notizen && e.notizen.length) || 0) + '</td>' +
+        '<td class="muted">' + fmtDate(e.updatedAt || e.createdAt) + '</td>' +
+        '</tr>';
+    }).join("");
+    return '<div class="table-wrap"><table>' +
+      '<thead><tr><th>Alias</th><th>Kategorie</th><th>Status</th><th>Rolle / Fachgebiet</th>' +
+      '<th>Branche</th><th>Organisation</th><th>Notizen</th><th>Geändert</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody></table></div>';
+  }
+
+  function renderBoard(list) {
+    var cols = STATUS.map(function (s) {
+      var items = list.filter(function (e) { return e.status === s.id; });
+      var cards = items.map(function (e) {
+        return '<div class="card" draggable="true" data-id="' + esc(e.id) + '" tabindex="0" role="button" aria-label="Eintrag ' + esc(e.alias) + ' öffnen">' +
+          '<span class="alias">' + esc(e.alias) + '</span>' +
+          '<span class="chip kat">' + esc(katById(e.kategorie).label) + '</span>' +
+          '<div class="meta">' + esc(e.rolle || e.org || "—") + '</div>' +
+          '</div>';
+      }).join("");
+      return '<div class="col" data-status="' + s.id + '">' +
+        '<h3>' + esc(s.label) + ' <b>' + items.length + '</b></h3>' + cards + '</div>';
+    }).join("");
+    return '<div class="board">' + cols + '</div>';
+  }
+
+  function render() {
+    renderStats();
+    var list = filtered();
+    $("view").innerHTML = state.view === "board" ? renderBoard(list) : renderList(list);
+    $("tabListe").setAttribute("aria-selected", state.view === "liste");
+    $("tabBoard").setAttribute("aria-selected", state.view === "board");
+    bindView();
+  }
+
+  function bindView() {
+    var view = $("view");
+    view.querySelectorAll("[data-id]").forEach(function (el) {
+      el.addEventListener("click", function () { openModal(el.getAttribute("data-id")); });
+      el.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); openModal(el.getAttribute("data-id")); }
+      });
+    });
+    if (state.view === "board") {
+      view.querySelectorAll(".card").forEach(function (card) {
+        card.addEventListener("dragstart", function (ev) {
+          ev.dataTransfer.setData("text/plain", card.getAttribute("data-id"));
+          ev.dataTransfer.effectAllowed = "move";
+        });
+      });
+      view.querySelectorAll(".col").forEach(function (col) {
+        col.addEventListener("dragover", function (ev) { ev.preventDefault(); col.classList.add("dragover"); });
+        col.addEventListener("dragleave", function () { col.classList.remove("dragover"); });
+        col.addEventListener("drop", function (ev) {
+          ev.preventDefault();
+          col.classList.remove("dragover");
+          var id = ev.dataTransfer.getData("text/plain");
+          var entry = state.entries.find(function (e) { return e.id === id; });
+          var newStatus = col.getAttribute("data-status");
+          if (entry && entry.status !== newStatus) {
+            var upd = Object.assign({}, entry, { status: newStatus, updatedAt: Date.now() });
+            pushEntry(upd).then(function () {
+              toast(upd.alias + " → " + statusById(newStatus).label);
+            });
+          }
+        });
+      });
+    }
+  }
+
+  /* ---------- modal ---------- */
+  function fillSelect(sel, items) {
+    items.forEach(function (it) {
+      var o = document.createElement("option");
+      o.value = it.id; o.textContent = it.label;
+      sel.appendChild(o);
+    });
+  }
+
+  function openModal(id) {
+    state.editingId = id || null;
+    var e = id ? state.entries.find(function (x) { return x.id === id; }) : null;
+    $("modalTitle").textContent = e ? "Eintrag bearbeiten" : "Neuer Eintrag";
+    $("inKat").value = e ? e.kategorie : "teilnehmer";
+    $("inAlias").value = e ? e.alias : genAlias($("inKat").value);
+    $("inStatus").value = e ? e.status : "neu";
+    $("inOrg").value = e ? (e.org || "") : "";
+    $("inBranche").value = e ? (e.branche || "") : "";
+    $("inRolle").value = e ? (e.rolle || "") : "";
+    $("inTags").value = e ? (e.tags || []).join(", ") : "";
+    $("btnDelete").hidden = !e;
+    $("notesBlock").hidden = !e;
+    if (e) renderNotes(e);
+    $("modal").showModal();
+    $("inAlias").focus();
+  }
+
+  function renderNotes(e) {
+    var list = (e.notizen || []).slice().sort(function (a, b) { return b.ts - a.ts; });
+    $("notesList").innerHTML = list.length
+      ? list.map(function (n) {
+          return '<div class="note"><time>' + fmtDate(n.ts) + '</time>' + esc(n.text) + '</div>';
+        }).join("")
+      : '<p class="hint" style="margin:0">Noch keine Notizen.</p>';
+  }
+
+  function saveEntry(ev) {
+    ev.preventDefault();
+    var alias = $("inAlias").value.trim();
+    if (!alias) { toast("Alias-Code fehlt."); return; }
+    var dup = state.entries.find(function (x) { return x.alias === alias && x.id !== state.editingId; });
+    if (dup) { toast("Alias-Code bereits vergeben."); return; }
+    var tags = $("inTags").value.split(",").map(function (t) { return t.trim(); }).filter(Boolean);
+    var now = Date.now();
+    var base = state.editingId
+      ? state.entries.find(function (x) { return x.id === state.editingId; })
+      : null;
+    var entry = {
+      id: base ? base.id : uid(),
+      alias: alias,
+      kategorie: $("inKat").value,
+      status: $("inStatus").value,
+      org: $("inOrg").value.trim(),
+      branche: $("inBranche").value.trim(),
+      rolle: $("inRolle").value.trim(),
+      tags: tags,
+      notizen: base ? (base.notizen || []) : [],
+      createdAt: base ? base.createdAt : now,
+      updatedAt: now
+    };
+    pushEntry(entry).then(function () {
+      toast(base ? "Gespeichert." : "Eintrag angelegt.");
+      $("modal").close();
+    });
+  }
+
+  /* ---------- export / import ---------- */
+  function doExport() {
+    if (state.entries.length === 0) { toast("Keine Einträge zum Exportieren."); return; }
+    var payload = JSON.stringify({ app: "kontaktregister", version: 1, exportedAt: new Date().toISOString(), entries: state.entries }, null, 2);
+    var name = "kontaktregister-" + new Date().toISOString().slice(0, 10) + ".json";
+    try {
+      var blob = new Blob([payload], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 400);
+      toast("Export gestartet.");
+    } catch (e) { toast("Export fehlgeschlagen."); }
+  }
+
+  function doImport(file) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var data = JSON.parse(reader.result);
+        var incoming = Array.isArray(data) ? data : (data && Array.isArray(data.entries) ? data.entries : null);
+        if (!incoming) { toast("Datei nicht lesbar: kein Kontaktregister-Export."); return; }
+        var chain = Promise.resolve();
+        var count = 0;
+        incoming.forEach(function (inc) {
+          if (!inc || !inc.id || !inc.alias) return;
+          count++;
+          chain = chain.then(function () { return pushEntry(inc); });
+        });
+        chain.then(function () { toast("Import abgeschlossen: " + count + " Einträge übertragen."); });
+      } catch (e) { toast("Import fehlgeschlagen: ungültiges JSON."); }
+    };
+    reader.readAsText(file);
+  }
+
+  /* ---------- wiring ---------- */
+  fillSelect($("inKat"), KATEGORIEN);
+  fillSelect($("inStatus"), STATUS);
+  KATEGORIEN.forEach(function (k) {
+    var o = document.createElement("option");
+    o.value = k.id; o.textContent = k.label;
+    $("fKat").appendChild(o);
+  });
+  STATUS.forEach(function (s) {
+    var o = document.createElement("option");
+    o.value = s.id; o.textContent = s.label;
+    $("fStatus").appendChild(o);
+  });
+
+  $("loginForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var pass = $("loginPass").value;
+    if (!pass) return;
+    $("loginErr").textContent = "";
+    tryLogin(pass).catch(function () {
+      $("loginErr").textContent = "Zugangscode falsch oder Server nicht erreichbar.";
+    });
+  });
+
+  $("tabListe").addEventListener("click", function () { state.view = "liste"; render(); });
+  $("tabBoard").addEventListener("click", function () { state.view = "board"; render(); });
+  $("q").addEventListener("input", function () { state.q = this.value; render(); });
+  $("fKat").addEventListener("change", function () { state.fKat = this.value; render(); });
+  $("fStatus").addEventListener("change", function () { state.fStatus = this.value; render(); });
+  $("btnNew").addEventListener("click", function () { openModal(null); });
+  $("btnClose").addEventListener("click", function () { $("modal").close(); });
+  $("btnCancel").addEventListener("click", function () { $("modal").close(); });
+  $("entryForm").addEventListener("submit", saveEntry);
+  $("btnGenAlias").addEventListener("click", function () { $("inAlias").value = genAlias($("inKat").value); });
+  $("inKat").addEventListener("change", function () {
+    if (!state.editingId) $("inAlias").value = genAlias(this.value);
+  });
+  $("btnDelete").addEventListener("click", function () {
+    var e = state.entries.find(function (x) { return x.id === state.editingId; });
+    if (!e) return;
+    if (confirm("Eintrag „" + e.alias + "“ endgültig löschen?")) {
+      api("/api/entries?id=" + encodeURIComponent(e.id), { method: "DELETE" }).then(function () {
+        applyDelete(e.id);
+        $("modal").close();
+        render();
+        toast("Eintrag gelöscht.");
+      }).catch(function () { toast("Löschen fehlgeschlagen."); });
+    }
+  });
+  $("btnAddNote").addEventListener("click", function () {
+    var txt = $("inNote").value.trim();
+    if (!txt || !state.editingId) return;
+    var e = state.entries.find(function (x) { return x.id === state.editingId; });
+    if (!e) return;
+    var upd = Object.assign({}, e, {
+      notizen: (e.notizen || []).concat([{ ts: Date.now(), text: txt }]),
+      updatedAt: Date.now()
+    });
+    pushEntry(upd).then(function (saved) {
+      $("inNote").value = "";
+      renderNotes(saved);
+    });
+  });
+  $("inNote").addEventListener("keydown", function (ev) {
+    if (ev.key === "Enter") { ev.preventDefault(); $("btnAddNote").click(); }
+  });
+  $("btnExport").addEventListener("click", doExport);
+  $("btnImport").addEventListener("click", function () { $("fileImport").click(); });
+  $("fileImport").addEventListener("change", function () {
+    if (this.files && this.files[0]) doImport(this.files[0]);
+    this.value = "";
+  });
+
+  /* Auto-Login, wenn Token aus der Sitzung vorhanden */
+  if (state.token) {
+    tryLogin(state.token).catch(function () {
+      sessionStorage.removeItem("kr-token");
+      state.token = "";
+    });
+  } else {
+    $("loginPass").focus();
+  }
+})();
+</script>
+</body>
+</html>
