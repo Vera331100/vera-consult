@@ -221,6 +221,25 @@
     content: ""; position: absolute; left: 0; top: 8px; width: 10px; height: 2px; background: var(--cyan);
   }
 
+  /* Netzwerk – light */
+  #netzwerk { background: var(--paper); color: var(--ink); }
+  #netzwerk .az { color: var(--petrol); }
+  #netzwerk .az::after { background: var(--line); }
+  #netzwerk h2 { color: var(--ink); }
+  .net-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; margin-top: 54px; }
+  .net-card {
+    background: #fff; border: 1px solid var(--line); border-radius: 4px;
+    padding: 30px 28px; position: relative; overflow: hidden;
+  }
+  .net-card::after {
+    content: ""; position: absolute; right: -22px; top: -22px; width: 74px; height: 74px;
+    border: 1px solid var(--line); border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(20,108,122,.10), transparent 70%);
+  }
+  .net-card h3 { font-size: 18px; font-weight: 650; margin: 8px 0 10px; }
+  .net-card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+  .net-card .code { font-family: var(--mono); font-size: 11.5px; letter-spacing: .2em; color: var(--petrol); }
+
   /* Ansatz – light */
   #ansatz { background: var(--paper-2); color: var(--ink); }
   #ansatz .az { color: var(--petrol); }
@@ -277,6 +296,7 @@
     <div class="nav-links">
       <a href="#leistungen">Leistungen</a>
       <a href="#zielgruppen">Auftraggeber</a>
+      <a href="#netzwerk">Netzwerk</a>
       <a href="#ansatz">Ansatz</a>
       <a class="nav-cta" href="#kontakt">Gespräch anfragen</a>
     </div>
@@ -403,9 +423,39 @@
   </div>
 </section>
 
+<section id="netzwerk">
+  <div class="wrap">
+    <p class="az rv">AZ-03 / Netzwerk</p>
+    <h2 class="rv">Ein Netzwerk, das über Grenzen hinweg denkt.</h2>
+    <p class="section-intro rv">
+      Vera Consult arbeitet mit einem internationalen Netzwerk aus Analysten und Beratern.
+      Viele von ihnen haben ihre Erfahrung über Jahre in nationalen und internationalen
+      Behörden aufgebaut &ndash; in Ermittlung, Analyse und Führungsverantwortung. Je nach
+      Mandat stellen wir das Team zusammen, das Ihr Fall verlangt.
+    </p>
+    <div class="net-grid">
+      <div class="net-card rv">
+        <span class="code">HERKUNFT</span>
+        <h3>Behördliche Laufbahnen</h3>
+        <p>Unsere Netzwerkpartner bringen langjährige Praxis aus Ermittlungs-, Analyse- und Führungsverwendungen bei Behörden mit &ndash; keine Theorie aus zweiter Hand.</p>
+      </div>
+      <div class="net-card rv">
+        <span class="code">REICHWEITE</span>
+        <h3>International aufgestellt</h3>
+        <p>Sprachen, Regionalkenntnis und Kontakte über Ländergrenzen hinweg &ndash; mit besonderem Schwerpunkt Türkei und MENA-Region.</p>
+      </div>
+      <div class="net-card rv">
+        <span class="code">EINSATZ</span>
+        <h3>Passgenau je Mandat</h3>
+        <p>Kein starres Team, sondern die richtige Besetzung für den konkreten Fall &ndash; unter einheitlicher Verantwortung und Vertraulichkeitsbindung von Vera Consult.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="ansatz">
   <div class="wrap">
-    <p class="az rv">AZ-03 / Ansatz</p>
+    <p class="az rv">AZ-04 / Ansatz</p>
     <h2 class="rv">Drei Prinzipien, ohne Ausnahme.</h2>
     <div class="principles rv">
       <div class="principle">
@@ -429,7 +479,7 @@
 
 <section id="kontakt">
   <div class="wrap">
-    <p class="az rv">AZ-04 / Kontakt</p>
+    <p class="az rv">AZ-05 / Kontakt</p>
     <h2 class="rv" style="color:#fff">Der erste Schritt ist ein Gespräch.</h2>
     <div class="contact-card rv">
       <div>
