@@ -2,10 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<script>document.documentElement.className += " js";</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Vera Consult – Sicherheits- und Complianceberatung für Unternehmen und öffentliche Auftraggeber. Interne Ermittlungen, Geldwäscheprävention, Krisenmanagement, Schulungen.">
-<title>Vera Consult · Sicherheits- &amp; Complianceberatung</title>
+<meta name="description" content="Vera Consult – Beratung und Fortbildung zu Compliance, internen Untersuchungen, Geldwäscheprävention und Krisenvorsorge für Unternehmen und öffentliche Auftraggeber.">
+<title>Vera Consult · Sicherheits- und Complianceberatung</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 116'%3E%3Crect width='96' height='116' fill='%23141C2E'/%3E%3Cpath d='M9 25 L25 15 L48.1 56 L71 15 L87 25 L47.5 94 Z' fill='%23FBFAF7'/%3E%3Crect x='14' y='101' width='68' height='9' fill='%23C2913A'/%3E%3C/svg%3E">
 <style>
   :root {
@@ -15,497 +14,365 @@
     --grau: #6B7280;
     --papier: #FBFAF7;
 
-    --ink: #0F1624;
-    --ink-2: #171F33;
-    --ink-3: #1E2740;
+    --ink: var(--tinte);
+    --ink-soft: #2C3648;
     --paper: var(--papier);
-    --paper-2: #F0EEE7;
+    --paper-2: #F2F0EA;
     --brass: var(--messing);
-    --brass-bright: #DCAB53;
     --brass-deep: #8E6828;
-    --muted: #5F6A78;
-    --muted-dark: #99A3B4;
-    --line: #E0DDD4;
-    --line-dark: #26314A;
+    --muted: #5D6875;
+    --muted-light: #A9B2BF;
+    --line: #E2DFD7;
+    --line-strong: #CFCBC0;
+    --line-dark: #2A344A;
 
-    --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
-    --display: "Bahnschrift", "Segoe UI Semibold", "Segoe UI", system-ui, sans-serif;
-    --mono: "Cascadia Mono", Consolas, "Courier New", monospace;
+    --serif: Cambria, Georgia, "Times New Roman", serif;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   }
+
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   body {
-    margin: 0; background: var(--ink); color: var(--paper);
-    font-family: var(--sans); font-size: 16px; line-height: 1.65;
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 16.5px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--brass-bright); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  :focus-visible { outline: 2px solid var(--brass-bright); outline-offset: 3px; }
-  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--brass-deep); }
+  a:hover { color: var(--ink); }
+  :focus-visible { outline: 2px solid var(--brass-deep); outline-offset: 3px; }
 
-  h1, h2, h3 { font-family: var(--display); line-height: 1.08; text-wrap: balance; margin: 0; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
 
-  .az {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
-    color: var(--brass); text-transform: uppercase;
-    display: flex; align-items: center; gap: 14px; margin: 0 0 20px;
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.25; text-wrap: balance; margin: 0; }
+  p { margin: 0 0 16px; }
+
+  .label {
+    font-family: var(--sans); font-size: 11.5px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--brass-deep);
+    margin: 0 0 14px;
   }
-  .az::after { content: ""; height: 1px; flex: 1; max-width: 120px; background: var(--line-dark); }
 
   /* ---------- Logo ---------- */
-  .mark { display: block; }
   .mark .v { fill: currentColor; }
   .mark .bar { fill: var(--brass); }
 
-  /* ---------- Reveal beim Scrollen ----------
-     Inhalte sind grundsätzlich sichtbar; nur wenn JavaScript läuft (.js),
-     werden sie für die Einblend-Animation zunächst ausgeblendet. */
-  .js .rv { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s ease; }
-  .js .rv.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) {
-    .js .rv { opacity: 1; transform: none; transition: none; }
+  /* ---------- Kopfzeile ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--paper); border-bottom: 1px solid var(--line);
   }
+  .head-in { display: flex; align-items: center; gap: 16px; max-width: 1040px; margin: 0 auto; padding: 16px 28px; }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+  .brand .mark { width: 21px; height: auto; flex: none; }
+  .brand-word { display: flex; flex-direction: column; line-height: 1; }
+  .brand-word b { font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: .17em; }
+  .brand-word span { font-size: 9px; letter-spacing: .38em; color: var(--muted); margin-top: 4px; }
+  .site-nav { margin-left: auto; display: flex; gap: 26px; }
+  .site-nav a { color: var(--muted); font-size: 14px; text-decoration: none; }
+  .site-nav a:hover { color: var(--ink); }
+  @media (max-width: 720px) { .site-nav { display: none; } }
 
-  /* ---------- Nav ---------- */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
-    border-bottom: 1px solid transparent;
-    transition: background .3s, border-color .3s;
+  /* ---------- Einleitung ---------- */
+  .intro { padding: 72px 0 64px; border-bottom: 1px solid var(--line); }
+  .intro h1 { font-size: clamp(29px, 4vw, 41px); max-width: 20ch; }
+  .intro .lead {
+    max-width: 62ch; font-size: 18px; color: var(--ink-soft); margin-top: 22px;
+    padding-left: 20px; border-left: 3px solid var(--brass);
   }
-  nav.scrolled {
-    background: color-mix(in srgb, var(--ink) 90%, transparent);
-    backdrop-filter: blur(10px);
-    border-color: var(--line-dark);
-  }
-  .nav-in { display: flex; align-items: center; gap: 14px; max-width: 1140px; margin: 0 auto; padding: 15px 24px; }
-  .nav-brand { display: flex; align-items: center; gap: 13px; color: var(--papier); }
-  .nav-brand:hover { text-decoration: none; }
-  .nav-brand .mark { width: 26px; height: auto; }
-  .nav-word { display: flex; flex-direction: column; line-height: 1; }
-  .nav-word b { font-family: var(--display); font-size: 19px; font-weight: 700; letter-spacing: .16em; }
-  .nav-word span { font-family: var(--display); font-size: 9.5px; letter-spacing: .42em; color: var(--muted-dark); margin-top: 3px; }
-  .nav-links { margin-left: auto; display: flex; gap: 26px; align-items: center; }
-  .nav-links a { color: var(--muted-dark); font-size: 13.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-family: var(--display); }
-  .nav-links a:hover { color: var(--brass-bright); text-decoration: none; }
-  @media (max-width: 760px) { .nav-links a:not(.nav-cta) { display: none; } }
-  .nav-cta {
-    border: 1px solid var(--brass); border-radius: 2px; padding: 8px 16px;
-    color: var(--brass-bright) !important;
-  }
-  .nav-cta:hover { background: var(--brass); color: var(--ink) !important; }
-
-  /* ---------- Hero ---------- */
-  .hero {
-    position: relative; overflow: hidden;
-    min-height: 92vh; display: flex; align-items: center;
-    background: radial-gradient(1200px 620px at 76% 22%, rgba(194,145,58,.16), transparent 62%), var(--ink);
-    padding: 140px 0 90px;
-  }
-  #net { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hero .wrap { position: relative; z-index: 2; }
-  .hero-tag {
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: .3em;
-    color: var(--brass); text-transform: uppercase; margin: 0 0 26px;
-    display: inline-flex; align-items: center; gap: 12px;
-  }
-  .hero-tag::before {
-    content: ""; width: 9px; height: 9px; background: var(--brass);
-    box-shadow: 0 0 12px var(--brass); border-radius: 50%;
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-  @media (prefers-reduced-motion: reduce) { .hero-tag::before { animation: none; } }
-
-  .hero h1 {
-    font-size: clamp(52px, 9.5vw, 118px);
-    font-weight: 700; font-stretch: 78%;
-    text-transform: uppercase; letter-spacing: .005em;
-    color: #fff; max-width: 12ch;
-  }
-  .hero h1 .line { display: block; overflow: hidden; }
-  .hero h1 .line > span { display: inline-block; transform: translateY(110%); animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; }
-  .hero h1 .line:nth-child(2) > span { animation-delay: .12s; }
-  .hero h1 .line:nth-child(3) > span { animation-delay: .24s; }
-  .hero h1 em { font-style: normal; color: var(--brass-bright); }
-  @keyframes rise { to { transform: translateY(0); } }
-  @media (prefers-reduced-motion: reduce) { .hero h1 .line > span { transform: none; animation: none; } }
-
-  .hero p.lede { max-width: 56ch; font-size: 18px; color: var(--muted-dark); margin: 30px 0 40px; }
-  .redact {
-    background: var(--brass); color: transparent; border-radius: 1px;
-    padding: 0 6px; cursor: help; user-select: none;
-    transition: background .35s, color .35s;
-  }
-  .redact:hover, .redact:focus { background: transparent; color: var(--brass-bright); }
-
-  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .intro .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
   .btn {
-    display: inline-block; font-family: var(--display); font-weight: 600;
-    font-size: 15px; letter-spacing: .08em; text-transform: uppercase;
-    padding: 15px 30px; border-radius: 2px; border: 1px solid transparent;
+    display: inline-block; font-size: 14.5px; font-weight: 600; text-decoration: none;
+    padding: 12px 24px; border: 1px solid var(--ink); border-radius: 2px;
   }
-  .btn:hover { text-decoration: none; }
-  .btn.solid { background: var(--brass); color: var(--ink); }
-  .btn.solid:hover { background: var(--brass-bright); box-shadow: 0 0 26px rgba(194,145,58,.4); }
-  .btn.ghost { border-color: var(--line-dark); color: #fff; }
-  .btn.ghost:hover { border-color: var(--brass); color: var(--brass-bright); }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+  .btn.primary:hover { background: var(--ink-soft); color: var(--paper); }
+  .btn.plain { color: var(--ink); border-color: var(--line-strong); }
+  .btn.plain:hover { border-color: var(--ink); color: var(--ink); }
 
-  .stamp {
-    position: absolute; right: 4vw; top: 132px; z-index: 2;
-    font-family: var(--mono); font-size: 13px; letter-spacing: .3em;
-    color: var(--brass); border: 2px solid var(--brass); border-radius: 2px;
-    padding: 8px 18px; transform: rotate(6deg); opacity: .7;
-    text-transform: uppercase;
-  }
-  @media (max-width: 900px) { .stamp { display: none; } }
+  /* ---------- Abschnitte ---------- */
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section h2 { font-size: clamp(23px, 2.8vw, 30px); max-width: 26ch; }
+  .section-lead { max-width: 64ch; color: var(--muted); margin-top: 16px; }
 
-  /* ---------- Ticker ---------- */
-  .ticker {
-    border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark);
-    background: var(--ink-2); overflow: hidden; white-space: nowrap;
-    padding: 13px 0; position: relative; z-index: 2;
-  }
-  .ticker-track { display: inline-block; animation: tick 38s linear infinite; }
-  .ticker span {
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: .26em;
-    text-transform: uppercase; color: var(--muted-dark); margin: 0 34px;
-  }
-  .ticker span::after { content: "//"; color: var(--brass-deep); margin-left: 34px; }
-  @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+  /* Leistungen */
+  .leistungen { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 40px; margin-top: 40px; }
+  .leistung { padding: 26px 0; border-top: 1px solid var(--line); }
+  .leistung h3 { font-size: 19px; margin-bottom: 8px; }
+  .leistung p { font-size: 15.5px; color: var(--muted); margin-bottom: 10px; }
+  .leistung ul { margin: 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
+  .leistung li { margin-bottom: 4px; }
 
-  /* ---------- Sections ---------- */
-  section { padding: 100px 0; }
-  section h2 {
-    font-size: clamp(32px, 4.6vw, 54px); font-weight: 700; font-stretch: 82%;
-    text-transform: uppercase; max-width: 22ch;
-  }
-  .section-intro { max-width: 60ch; color: var(--muted); margin: 20px 0 0; }
+  /* Zweispalter */
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+  @media (max-width: 760px) { .zwei { grid-template-columns: 1fr; gap: 28px; } }
+  .zwei h3 { font-size: 18px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+  .zwei ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+  .zwei li { margin-bottom: 6px; }
+  .zwei p { color: var(--muted); font-size: 15.5px; }
 
-  /* Leistungen – hell */
-  #leistungen { background: var(--paper); color: var(--tinte); }
-  #leistungen .az { color: var(--brass-deep); }
-  #leistungen .az::after { background: var(--line); }
-  #leistungen h2 { color: var(--tinte); }
-  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 54px; }
-  .service {
-    position: relative; background: #fff; border: 1px solid var(--line);
-    padding: 30px 28px 24px; border-radius: 3px; overflow: hidden;
-    display: flex; flex-direction: column; gap: 10px;
-    transition: transform .25s ease, box-shadow .25s ease;
-  }
-  .service::before {
-    content: ""; position: absolute; top: 0; left: 0; height: 3px; width: 100%;
-    background: linear-gradient(90deg, var(--brass-deep), var(--brass));
-    transform: scaleX(.18); transform-origin: left; transition: transform .35s ease;
-  }
-  .service:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(20,28,46,.14); }
-  .service:hover::before { transform: scaleX(1); }
-  @media (prefers-reduced-motion: reduce) {
-    .service, .service::before { transition: none; }
-    .service:hover { transform: none; }
-  }
-  .service .code { font-family: var(--mono); font-size: 11.5px; letter-spacing: .2em; color: var(--brass-deep); }
-  .service h3 { font-size: 20px; font-weight: 650; }
-  .service p { margin: 0; font-size: 14.5px; color: var(--muted); }
-  .service ul { margin: 6px 0 0; padding-left: 18px; font-size: 14px; color: var(--muted); }
-  .service li { margin-bottom: 4px; }
+  /* Arbeitsweise */
+  .grundsaetze { margin-top: 36px; }
+  .grundsatz { display: grid; grid-template-columns: 200px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); }
+  @media (max-width: 700px) { .grundsatz { grid-template-columns: 1fr; gap: 8px; } }
+  .grundsatz h3 { font-size: 18px; }
+  .grundsatz p { margin: 0; color: var(--muted); font-size: 15.5px; }
 
-  /* Zielgruppen – dunkel */
-  #zielgruppen { background: var(--ink); position: relative; overflow: hidden; }
-  #zielgruppen::before {
-    content: ""; position: absolute; inset: 0;
-    background: repeating-linear-gradient(115deg, transparent 0 52px, rgba(194,145,58,.04) 52px 53px);
-    pointer-events: none;
-  }
-  #zielgruppen h2 { color: #fff; }
-  .aud { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 54px; position: relative; }
-  @media (max-width: 780px) { .aud { grid-template-columns: 1fr; } }
-  .aud-col {
-    background: var(--ink-2); border: 1px solid var(--line-dark); border-radius: 3px;
-    padding: 34px 32px;
-  }
-  .aud-col h3 {
-    font-family: var(--mono); font-size: 13px; letter-spacing: .26em; text-transform: uppercase;
-    color: var(--brass-bright); margin-bottom: 16px; font-weight: 600;
-  }
-  .aud-col p { color: var(--muted-dark); margin: 0 0 14px; font-size: 15px; }
-  .aud-col ul { margin: 0; padding-left: 0; list-style: none; color: var(--muted-dark); font-size: 14.5px; }
-  .aud-col li { margin-bottom: 9px; padding-left: 22px; position: relative; }
-  .aud-col li::before { content: ""; position: absolute; left: 0; top: 8px; width: 10px; height: 2px; background: var(--brass); }
+  /* Rechtlicher Rahmen */
+  #rahmen { background: var(--paper-2); }
+  .rahmen-liste { margin-top: 34px; display: grid; gap: 18px; }
+  .rahmen-punkt { padding-left: 20px; border-left: 2px solid var(--line-strong); }
+  .rahmen-punkt b { display: block; font-family: var(--serif); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  .rahmen-punkt span { color: var(--muted); font-size: 15.5px; }
 
-  /* Netzwerk – hell */
-  #netzwerk { background: var(--paper); color: var(--tinte); }
-  #netzwerk .az { color: var(--brass-deep); }
-  #netzwerk .az::after { background: var(--line); }
-  #netzwerk h2 { color: var(--tinte); }
-  .net-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 22px; margin-top: 54px; }
-  .net-card {
-    background: #fff; border: 1px solid var(--line); border-radius: 3px;
-    padding: 30px 28px; position: relative; overflow: hidden;
+  /* Kontakt */
+  #kontakt { background: var(--ink); color: var(--paper); border-bottom: 0; }
+  #kontakt h2 { color: var(--paper); }
+  #kontakt .label { color: var(--brass); }
+  #kontakt .section-lead { color: var(--muted-light); }
+  .kontakt-box {
+    margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center;
+    gap: 20px 40px; padding-top: 28px; border-top: 1px solid var(--line-dark);
   }
-  .net-card::after {
-    content: ""; position: absolute; right: -22px; top: -22px; width: 74px; height: 74px;
-    border: 1px solid var(--line); border-radius: 50%;
-    background: radial-gradient(circle at center, rgba(194,145,58,.12), transparent 70%);
-  }
-  .net-card h3 { font-size: 18px; font-weight: 650; margin: 8px 0 10px; }
-  .net-card p { margin: 0; font-size: 14.5px; color: var(--muted); }
-  .net-card .code { font-family: var(--mono); font-size: 11.5px; letter-spacing: .2em; color: var(--brass-deep); }
+  .kontakt-box .mail { font-size: 19px; font-family: var(--serif); }
+  .kontakt-box .mail a { color: var(--brass); text-decoration: none; }
+  .kontakt-box .mail a:hover { color: var(--paper); text-decoration: underline; }
+  .kontakt-box .anschrift { color: var(--muted-light); font-size: 15px; line-height: 1.6; }
 
-  /* Ansatz – hell 2 */
-  #ansatz { background: var(--paper-2); color: var(--tinte); }
-  #ansatz .az { color: var(--brass-deep); }
-  #ansatz .az::after { background: var(--line); }
-  #ansatz h2 { color: var(--tinte); }
-  .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; margin-top: 54px; border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
-  .principle { background: #fff; padding: 32px 30px; border-right: 1px solid var(--line); }
-  .principle:last-child { border-right: 0; }
-  @media (max-width: 860px) { .principle { border-right: 0; border-bottom: 1px solid var(--line); } .principle:last-child { border-bottom: 0; } }
-  .principle .num { font-family: var(--mono); font-size: 12px; color: var(--brass-deep); letter-spacing: .2em; }
-  .principle h3 { font-size: 18px; font-weight: 650; margin: 10px 0 10px; }
-  .principle p { margin: 0; font-size: 14.5px; color: var(--muted); }
-
-  /* Kontakt – dunkel */
-  #kontakt { background: var(--ink); }
-  .contact-card {
-    margin-top: 50px; position: relative; overflow: hidden;
-    background: linear-gradient(135deg, var(--ink-3), var(--ink-2));
-    border: 1px solid var(--line-dark); border-radius: 4px;
-    padding: 54px 48px; display: flex; flex-wrap: wrap; gap: 34px 60px;
-    align-items: center; justify-content: space-between;
-  }
-  .contact-card::before {
-    content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 5px;
-    background: linear-gradient(var(--brass-bright), var(--brass-deep));
-  }
-  .contact-card h3 { font-size: 28px; font-weight: 700; font-stretch: 85%; text-transform: uppercase; max-width: 20ch; color: #fff; }
-  .contact-card p { color: var(--muted-dark); margin: 10px 0 0; max-width: 48ch; font-size: 14.5px; }
-  .contact-meta a {
-    font-family: var(--mono); font-size: 16px; color: var(--brass-bright);
-    border: 1px solid var(--line-dark); border-radius: 2px; padding: 14px 22px; display: inline-block;
-  }
-  .contact-meta a:hover { border-color: var(--brass); text-decoration: none; box-shadow: 0 0 20px rgba(194,145,58,.22); }
-
-  /* ---------- Footer ---------- */
-  footer { background: var(--ink); color: var(--muted); border-top: 1px solid var(--line-dark); padding: 34px 0; font-size: 13px; }
-  .foot-in { max-width: 1140px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 12px 30px; align-items: center; }
-  .foot-in .mark { width: 17px; height: auto; color: var(--muted); }
+  /* ---------- Fußzeile ---------- */
+  footer { background: var(--ink); color: var(--muted-light); font-size: 13.5px; padding: 30px 0 40px; }
+  .foot-in { max-width: 1040px; margin: 0 auto; padding: 0 28px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; border-top: 1px solid var(--line-dark); padding-top: 26px; }
+  .foot-in .mark { width: 15px; height: auto; color: var(--muted-light); }
   .foot-in .spacer { flex: 1; }
-  footer a { color: var(--muted); }
-  footer a:hover { color: var(--brass-bright); }
+  footer a { color: var(--muted-light); text-decoration: none; }
+  footer a:hover { color: var(--paper); text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<nav id="nav" aria-label="Hauptnavigation">
-  <div class="nav-in">
-    <a class="nav-brand" href="#top" aria-label="Vera Consult – zum Seitenanfang">
+<header class="site">
+  <div class="head-in">
+    <a class="brand" href="#oben" aria-label="Vera Consult – zum Seitenanfang">
       <svg class="mark" viewBox="0 0 96 116" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
         <path class="v" d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z"/>
         <rect class="bar" x="0" y="105.6" width="95.6" height="10.4"/>
       </svg>
-      <span class="nav-word"><b>VERA</b><span>CONSULT</span></span>
+      <span class="brand-word"><b>VERA</b><span>CONSULT</span></span>
     </a>
-    <div class="nav-links">
+    <nav class="site-nav" aria-label="Bereiche">
       <a href="#leistungen">Leistungen</a>
-      <a href="#zielgruppen">Auftraggeber</a>
-      <a href="#netzwerk">Netzwerk</a>
-      <a href="#ansatz">Ansatz</a>
-      <a class="nav-cta" href="#kontakt">Gespräch anfragen</a>
-    </div>
-  </div>
-</nav>
-
-<header class="hero" id="top">
-  <canvas id="net" aria-hidden="true"></canvas>
-  <div class="stamp">Vertraulich</div>
-  <div class="wrap">
-    <p class="hero-tag">Sicherheits- &amp; Complianceberatung · B2B / B2G</p>
-    <h1 aria-label="Wissen, was dahinter steckt.">
-      <span class="line"><span>Wissen,</span></span>
-      <span class="line"><span>was <em>dahinter</em></span></span>
-      <span class="line"><span>steckt.</span></span>
-    </h1>
-    <p class="lede">
-      Vera Consult berät Unternehmen und öffentliche Auftraggeber bei internen Ermittlungen,
-      Geldwäscheprävention und Krisenlagen. Mit Methoden aus der kriminalistischen Praxis &ndash;
-      und der Diskretion, die <span class="redact" tabindex="0">Ihr Fall verdient</span>.
-    </p>
-    <div class="cta-row">
-      <a class="btn solid" href="#kontakt">Gespräch anfragen</a>
-      <a class="btn ghost" href="#leistungen">Leistungen</a>
-    </div>
+      <a href="#auftraggeber">Auftraggeber</a>
+      <a href="#zusammenarbeit">Zusammenarbeit</a>
+      <a href="#rahmen">Rechtlicher Rahmen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
   </div>
 </header>
 
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track" id="tickerTrack">
-    <span>Interne Ermittlungen</span><span>Geldwäscheprävention</span><span>Krisenmanagement</span><span>Due Diligence</span><span>Türkei / MENA</span><span>Schulungen</span><span>Stabsarbeit</span><span>Compliance</span>
-  </div>
-</div>
+<main id="oben">
 
-<section id="leistungen">
-  <div class="wrap">
-    <p class="az rv">AZ-01 / Leistungen</p>
-    <h2 class="rv">Fünf Felder. Ein Maßstab: belastbare Ergebnisse.</h2>
-    <p class="section-intro rv">
-      Jedes Mandat beginnt mit einer nüchternen Lagebeurteilung &ndash; und endet mit Ergebnissen,
-      die vor Geschäftsleitung, Aufsicht und im Zweifel vor Gericht bestehen.
-    </p>
-    <div class="services">
-      <article class="service rv">
-        <span class="code">VC-101</span>
-        <h3>Interne Ermittlungen &amp; Fraud</h3>
-        <p>Unternehmensinterne Untersuchungen bei Verdacht auf Betrug, Untreue oder Korruption.</p>
-        <ul>
-          <li>Beweissicherung und Dokumentation</li>
-          <li>Interviewführung mit Beteiligten</li>
-          <li>Innentäter-Muster und Prävention</li>
-        </ul>
-      </article>
-      <article class="service rv">
-        <span class="code">VC-102</span>
-        <h3>Geldwäscheprävention</h3>
-        <p>Praxisnahe Umsetzung der GwG-Pflichten &ndash; über den Gesetzestext hinaus.</p>
-        <ul>
-          <li>Typologien und Fallmuster aus der Praxis</li>
-          <li>Risikoanalyse für Verpflichtete</li>
-          <li>Mitarbeiterschulungen nach § 6 GwG</li>
-        </ul>
-      </article>
-      <article class="service rv">
-        <span class="code">VC-103</span>
-        <h3>Krisenmanagement &amp; Stabsarbeit</h3>
-        <p>Führung in Ausnahmelagen &ndash; strukturiert, geübt, entscheidungsfähig.</p>
-        <ul>
-          <li>Aufbau und Training von Krisenstäben</li>
-          <li>Bedrohungsmanagement</li>
-          <li>Entscheiden unter Druck</li>
-        </ul>
-      </article>
-      <article class="service rv">
-        <span class="code">VC-104</span>
-        <h3>Due Diligence Türkei / MENA</h3>
-        <p>Geschäftspartner- und Standortprüfung mit echter Regionalexpertise.</p>
-        <ul>
-          <li>Integritätsprüfung von Partnern</li>
-          <li>Betrugsmuster im Auslandsgeschäft</li>
-          <li>Reisesicherheit und Landeskunde</li>
-        </ul>
-      </article>
-      <article class="service rv">
-        <span class="code">VC-105</span>
-        <h3>Schulungen &amp; Vorträge</h3>
-        <p>Seminare und Keynotes von Praktikern &ndash; fallbasiert statt folienlastig.</p>
-        <ul>
-          <li>Interviewtechniken für Compliance-Teams</li>
-          <li>Führungskräftetraining Krisenlagen</li>
-          <li>Fachvorträge und Tagungsbeiträge</li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="zielgruppen">
-  <div class="wrap">
-    <p class="az rv">AZ-02 / Auftraggeber</p>
-    <h2 class="rv">Für Wirtschaft und öffentliche Hand.</h2>
-    <div class="aud">
-      <div class="aud-col rv">
-        <h3>B2B · Unternehmen</h3>
-        <p>Vom Mittelstand bis zum Konzern &ndash; überall dort, wo Compliance-, Betrugs- oder Sicherheitsfragen Führungsentscheidungen verlangen.</p>
-        <ul>
-          <li>Compliance- und Revisionsabteilungen</li>
-          <li>Konzernsicherheit und Risk Management</li>
-          <li>Banken, Zahlungsdienstleister, GwG-Verpflichtete</li>
-          <li>Unternehmen mit Türkei- und Auslandsgeschäft</li>
-        </ul>
-      </div>
-      <div class="aud-col rv">
-        <h3>B2G · Öffentliche Auftraggeber</h3>
-        <p>Verwaltung und öffentliche Einrichtungen unterstützen wir mit Fortbildung und Beratung &ndash; transparent, dokumentiert und vergabekonform.</p>
-        <ul>
-          <li>Fortbildungen für Verwaltung und Einrichtungen</li>
-          <li>Korruptionsprävention und Integrität</li>
-          <li>Krisenorganisation und Übungen</li>
-          <li>Fachvorträge und Gastreferate</li>
-        </ul>
+  <div class="intro">
+    <div class="wrap">
+      <p class="label">Sicherheits- und Complianceberatung</p>
+      <h1>Beratung und Fortbildung für Unternehmen und öffentliche Auftraggeber.</h1>
+      <p class="lead">
+        Vera Consult unterstützt Organisationen bei Compliance-Fragen, internen Untersuchungen,
+        Geldwäscheprävention und Krisenvorsorge &ndash; sachlich, vertraulich und
+        im Rahmen des geltenden Rechts.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#kontakt">Kontakt aufnehmen</a>
+        <a class="btn plain" href="#leistungen">Leistungen ansehen</a>
       </div>
     </div>
   </div>
-</section>
 
-<section id="netzwerk">
-  <div class="wrap">
-    <p class="az rv">AZ-03 / Netzwerk</p>
-    <h2 class="rv">Ein Netzwerk, das über Grenzen hinweg denkt.</h2>
-    <p class="section-intro rv">
-      Vera Consult arbeitet mit einem internationalen Netzwerk aus Analysten und Beratern.
-      Viele von ihnen haben ihre Erfahrung über Jahre in nationalen und internationalen
-      Behörden aufgebaut &ndash; in Ermittlung, Analyse und Führungsverantwortung. Je nach
-      Mandat stellen wir das Team zusammen, das Ihr Fall verlangt.
-    </p>
-    <div class="net-grid">
-      <div class="net-card rv">
-        <span class="code">HERKUNFT</span>
-        <h3>Behördliche Laufbahnen</h3>
-        <p>Unsere Netzwerkpartner bringen langjährige Praxis aus Ermittlungs-, Analyse- und Führungsverwendungen bei Behörden mit &ndash; keine Theorie aus zweiter Hand.</p>
-      </div>
-      <div class="net-card rv">
-        <span class="code">REICHWEITE</span>
-        <h3>International aufgestellt</h3>
-        <p>Sprachen, Regionalkenntnis und Kontakte über Ländergrenzen hinweg &ndash; mit besonderem Schwerpunkt Türkei und MENA-Region.</p>
-      </div>
-      <div class="net-card rv">
-        <span class="code">EINSATZ</span>
-        <h3>Passgenau je Mandat</h3>
-        <p>Kein starres Team, sondern die richtige Besetzung für den konkreten Fall &ndash; unter einheitlicher Verantwortung und Vertraulichkeitsbindung von Vera Consult.</p>
+  <section id="leistungen">
+    <div class="wrap">
+      <p class="label">Leistungen</p>
+      <h2>Beratung und Fortbildung in fünf Themenfeldern.</h2>
+      <p class="section-lead">
+        Der Zuschnitt jedes Auftrags wird vorab schriftlich vereinbart. Umfang, Vorgehen und
+        Grenzen der Tätigkeit legen wir gemeinsam mit Ihnen fest.
+      </p>
+      <div class="leistungen">
+        <article class="leistung">
+          <h3>Interne Untersuchungen</h3>
+          <p>Unterstützung bei unternehmensinternen Sachverhaltsaufklärungen, etwa bei Hinweisen auf Vermögensdelikte.</p>
+          <ul>
+            <li>Strukturierung und Planung des Vorgehens</li>
+            <li>Nachvollziehbare Dokumentation</li>
+            <li>Gesprächsführung mit Beteiligten</li>
+          </ul>
+        </article>
+        <article class="leistung">
+          <h3>Geldwäscheprävention</h3>
+          <p>Beratung und Schulung zu den Pflichten nach dem Geldwäschegesetz für Verpflichtete im Sinne des § 2 GwG.</p>
+          <ul>
+            <li>Risikoanalyse und interne Sicherungsmaßnahmen</li>
+            <li>Typologien und Fallbeispiele</li>
+            <li>Mitarbeiterunterweisungen nach § 6 GwG</li>
+          </ul>
+        </article>
+        <article class="leistung">
+          <h3>Krisenvorsorge und Organisation</h3>
+          <p>Aufbau und Erprobung von Strukturen für Ausnahmelagen, damit Entscheidungswege im Ernstfall belastbar sind.</p>
+          <ul>
+            <li>Krisenorganisation und Zuständigkeiten</li>
+            <li>Übungen und Auswertung</li>
+            <li>Umgang mit Bedrohungslagen</li>
+          </ul>
+        </article>
+        <article class="leistung">
+          <h3>Geschäftspartnerprüfung</h3>
+          <p>Beratung zur Prüfung von Geschäftsbeziehungen aus öffentlich zugänglichen Quellen &ndash; mit Schwerpunkt auf Geschäftsbeziehungen in die Türkei und die MENA-Region.</p>
+          <ul>
+            <li>Prüfkriterien und Prozessgestaltung</li>
+            <li>Betrugsmuster im Auslandsgeschäft</li>
+            <li>Landes- und Marktkunde</li>
+          </ul>
+        </article>
+        <article class="leistung">
+          <h3>Fortbildung und Vorträge</h3>
+          <p>Seminare, Inhouse-Schulungen und Fachvorträge, aufbereitet an konkreten Fallbeispielen.</p>
+          <ul>
+            <li>Gesprächsführung für Compliance-Aufgaben</li>
+            <li>Führungsverhalten in Ausnahmelagen</li>
+            <li>Beiträge für Fachveranstaltungen</li>
+          </ul>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="ansatz">
-  <div class="wrap">
-    <p class="az rv">AZ-04 / Ansatz</p>
-    <h2 class="rv">Drei Prinzipien, ohne Ausnahme.</h2>
-    <div class="principles rv">
-      <div class="principle">
-        <span class="num">01</span>
-        <h3>Praxis vor Theorie</h3>
-        <p>Unsere Berater kommen aus der operativen Ermittlungs- und Führungspraxis. Wir schulen nichts, was wir nicht selbst verantwortet haben.</p>
-      </div>
-      <div class="principle">
-        <span class="num">02</span>
-        <h3>Diskretion mit System</h3>
-        <p>Vertraulichkeit ist bei uns kein Versprechen, sondern Arbeitsweise: klare Vertraulichkeitsvereinbarungen, anonymisierte Fallarbeit, saubere Datenhaltung.</p>
-      </div>
-      <div class="principle">
-        <span class="num">03</span>
-        <h3>Transparenz gegenüber Auftraggebern</h3>
-        <p>Wer uns beauftragt, kennt unsere Herkunft, unsere Methoden und unsere Grenzen. Wir arbeiten ausschließlich im Rahmen des deutschen Rechts.</p>
+  <section id="auftraggeber">
+    <div class="wrap">
+      <p class="label">Auftraggeber</p>
+      <h2>Für Wirtschaft und öffentliche Hand.</h2>
+      <div class="zwei">
+        <div>
+          <h3>Unternehmen</h3>
+          <p>Überall dort, wo Compliance-, Betrugs- oder Sicherheitsfragen Entscheidungen der Leitungsebene verlangen.</p>
+          <ul>
+            <li>Compliance- und Revisionsbereiche</li>
+            <li>Unternehmenssicherheit und Risikomanagement</li>
+            <li>Verpflichtete nach dem Geldwäschegesetz</li>
+            <li>Unternehmen mit Auslandsgeschäft</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Öffentliche Auftraggeber</h3>
+          <p>Verwaltungen und öffentliche Einrichtungen unterstützen wir mit Fortbildung und Beratung &ndash; dokumentiert und vergaberechtskonform.</p>
+          <ul>
+            <li>Fortbildungen für Beschäftigte</li>
+            <li>Korruptionsprävention und Integrität</li>
+            <li>Krisenorganisation und Übungen</li>
+            <li>Fachvorträge und Gastreferate</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="kontakt">
-  <div class="wrap">
-    <p class="az rv">AZ-05 / Kontakt</p>
-    <h2 class="rv" style="color:#fff">Der erste Schritt ist ein Gespräch.</h2>
-    <div class="contact-card rv">
-      <div>
-        <h3>Schildern Sie uns Ihre Lage &ndash; vertraulich.</h3>
-        <p>Erstgespräche sind unverbindlich. Sie erreichen uns per E-Mail; wir melden uns in der Regel innerhalb eines Werktags.</p>
-      </div>
-      <div class="contact-meta">
-        <a href="mailto:kontakt@vera-consult.de">kontakt@vera-consult.de</a>
+  <section id="zusammenarbeit">
+    <div class="wrap">
+      <p class="label">Zusammenarbeit</p>
+      <h2>Fallbezogene Besetzung statt fester Struktur.</h2>
+      <p class="section-lead">
+        Vera Consult wird von Sinan Karaca als Einzelunternehmen geführt. Für einzelne Aufträge
+        ziehen wir bei Bedarf externe Fachleute hinzu &ndash; etwa für Sprach- und Regionalkenntnisse
+        oder für besondere Fachfragen.
+      </p>
+      <div class="zwei">
+        <div>
+          <h3>Auswahl und Prüfung</h3>
+          <p>
+            Externe Fachleute wählen wir nach der für den Auftrag erforderlichen Qualifikation aus.
+            Angaben zu Werdegang und Berufserfahrung lassen wir uns vor einem Einsatz durch Unterlagen
+            belegen.
+          </p>
+        </div>
+        <div>
+          <h3>Transparenz gegenüber dem Auftraggeber</h3>
+          <p>
+            Wer an einem Auftrag mitwirkt, stimmen wir vorab mit Ihnen ab. Alle Beteiligten werden
+            schriftlich zur Vertraulichkeit verpflichtet; die Verantwortung gegenüber dem Auftraggeber
+            bleibt bei Vera Consult.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section id="arbeitsweise">
+    <div class="wrap">
+      <p class="label">Arbeitsweise</p>
+      <h2>Drei Grundsätze.</h2>
+      <div class="grundsaetze">
+        <div class="grundsatz">
+          <h3>Praxisbezug</h3>
+          <p>Wir arbeiten an konkreten Sachverhalten und Fallbeispielen statt an allgemeinen Modellen. Was wir nicht fachlich abdecken, sagen wir und benennen es.</p>
+        </div>
+        <div class="grundsatz">
+          <h3>Vertraulichkeit</h3>
+          <p>Vertraulichkeit regeln wir vertraglich, nicht durch Zusicherungen: schriftliche Vertraulichkeitsvereinbarungen, Verarbeitung nach den Vorgaben der DSGVO und, soweit möglich, Arbeit mit pseudonymisierten Daten.</p>
+        </div>
+        <div class="grundsatz">
+          <h3>Nachvollziehbarkeit</h3>
+          <p>Vorgehen, Grundlagen und Ergebnisse dokumentieren wir so, dass sie für Leitung, Aufsicht und Auftraggeber nachvollziehbar bleiben.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rahmen">
+    <div class="wrap">
+      <p class="label">Rechtlicher Rahmen</p>
+      <h2>Was wir tun &ndash; und was ausdrücklich nicht.</h2>
+      <p class="section-lead">
+        Klarheit über die Grenzen der Tätigkeit gehört für uns zur Seriosität. Vera Consult
+        erbringt Beratungs-, Analyse- und Fortbildungsleistungen.
+      </p>
+      <div class="rahmen-liste">
+        <div class="rahmen-punkt">
+          <b>Keine Rechtsberatung</b>
+          <span>Die rechtliche Prüfung und Vertretung ist Rechtsanwältinnen und Rechtsanwälten vorbehalten (Rechtsdienstleistungsgesetz). Auf Wunsch arbeiten wir mit der von Ihnen beauftragten Kanzlei zusammen.</span>
+        </div>
+        <div class="rahmen-punkt">
+          <b>Keine hoheitlichen Befugnisse</b>
+          <span>Vera Consult ist ein privates Beratungsunternehmen ohne polizeiliche oder behördliche Befugnisse. Ermittlungen im Sinne der Strafprozessordnung obliegen allein den zuständigen Behörden.</span>
+        </div>
+        <div class="rahmen-punkt">
+          <b>Kein Bewachungsgewerbe</b>
+          <span>Bewachungsleistungen nach § 34a der Gewerbeordnung gehören nicht zum Leistungsangebot.</span>
+        </div>
+        <div class="rahmen-punkt">
+          <b>Datenschutz und Beschäftigtenrechte</b>
+          <span>Bei Untersuchungen in Unternehmen richten sich Vorgehen und Datenverarbeitung nach der DSGVO sowie den arbeits- und mitbestimmungsrechtlichen Vorgaben. Beteiligungsrechte sind vom Auftraggeber zu wahren; wir weisen auf sie hin.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap">
+      <p class="label">Kontakt</p>
+      <h2>Der erste Schritt ist ein Gespräch.</h2>
+      <p class="section-lead">
+        Schildern Sie uns Ihr Anliegen. Ein Erstgespräch ist unverbindlich; ob und wie wir
+        unterstützen können, sagen wir Ihnen offen.
+      </p>
+      <div class="kontakt-box">
+        <div class="mail"><a href="mailto:kontakt@vera-consult.de">kontakt@vera-consult.de</a></div>
+        <div class="anschrift">
+          Vera Consult &middot; Inhaber Sinan Karaca<br>
+          Rigaer Str. 18 &middot; 70378 Stuttgart
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
   <div class="foot-in">
@@ -513,150 +380,12 @@
       <path class="v" d="M1.1 11 L19 0 L48.1 51.6 L75.9 0 L94.5 11 L47.5 94.4 Z"/>
       <rect class="bar" x="0" y="105.6" width="95.6" height="10.4"/>
     </svg>
-    <span>&copy; 2026 Vera Consult &middot; Sicherheits- &amp; Complianceberatung &middot; Stuttgart</span>
+    <span>&copy; 2026 Vera Consult &middot; Inhaber Sinan Karaca &middot; Stuttgart</span>
     <span class="spacer"></span>
     <a href="/impressum">Impressum</a>
     <a href="/datenschutz">Datenschutz</a>
   </div>
 </footer>
 
-<script>
-(function () {
-  "use strict";
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  /* Nav-Hintergrund ab leichtem Scroll */
-  var nav = document.getElementById("nav");
-  function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 30); }
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
-  /* Ticker-Inhalt für die Endlosschleife verdoppeln */
-  var track = document.getElementById("tickerTrack");
-  track.innerHTML += track.innerHTML;
-
-  /* Scroll-Reveals: alles einblenden, was den unteren Bildschirmrand erreicht
-     hat oder bereits darüber liegt – auch bei sehr schnellem Scrollen. */
-  var offen = Array.prototype.slice.call(document.querySelectorAll(".rv"));
-  function alleZeigen() {
-    offen.forEach(function (el) { el.classList.add("in"); });
-    offen = [];
-  }
-  if (reduced) {
-    alleZeigen();
-  } else {
-    /* 1. IntersectionObserver – greift auch in eingebetteten Scroll-Containern */
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) {
-            en.target.classList.add("in");
-            io.unobserve(en.target);
-            offen = offen.filter(function (x) { return x !== en.target; });
-          }
-        });
-      }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
-      offen.forEach(function (el) { io.observe(el); });
-    }
-    /* 2. Positionsprüfung – fängt Elemente ab, die bei sehr schnellem
-          Scrollen zwischen zwei Frames übersprungen wurden */
-    var geplant = false;
-    function pruefen() {
-      geplant = false;
-      var grenze = window.innerHeight * 0.92;
-      offen = offen.filter(function (el) {
-        if (el.getBoundingClientRect().top < grenze) { el.classList.add("in"); return false; }
-        return true;
-      });
-    }
-    function anstossen() {
-      if (geplant) return;
-      geplant = true;
-      requestAnimationFrame(pruefen);
-    }
-    window.addEventListener("scroll", anstossen, { passive: true });
-    window.addEventListener("resize", anstossen);
-    pruefen();
-    /* 3. Sicherheitsnetz: nach 8 s ist garantiert nichts mehr unsichtbar */
-    setTimeout(alleZeigen, 8000);
-  }
-
-  /* Netzwerk-Canvas im Hero */
-  var canvas = document.getElementById("net");
-  var ctx = canvas.getContext("2d");
-  var nodes = [], W = 0, H = 0, raf = null;
-  var N = 64, LINK = 150;
-
-  function resize() {
-    var r = canvas.parentElement.getBoundingClientRect();
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = r.width; H = r.height;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-  function seed() {
-    nodes = [];
-    var n = W < 700 ? 36 : N;
-    for (var i = 0; i < n; i++) {
-      nodes.push({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28,
-        r: 1 + Math.random() * 1.8
-      });
-    }
-  }
-  function paint() {
-    ctx.lineWidth = 1;
-    for (var i = 0; i < nodes.length; i++) {
-      for (var j = i + 1; j < nodes.length; j++) {
-        var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-        var d = Math.sqrt(dx * dx + dy * dy);
-        if (d < LINK) {
-          ctx.strokeStyle = "rgba(194,145,58," + (0.20 * (1 - d / LINK)).toFixed(3) + ")";
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-    for (var k = 0; k < nodes.length; k++) {
-      ctx.fillStyle = "rgba(220,171,83,.55)";
-      ctx.beginPath();
-      ctx.arc(nodes[k].x, nodes[k].y, nodes[k].r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-  function step() {
-    ctx.clearRect(0, 0, W, H);
-    for (var i = 0; i < nodes.length; i++) {
-      var a = nodes[i];
-      a.x += a.vx; a.y += a.vy;
-      if (a.x < -20) a.x = W + 20; if (a.x > W + 20) a.x = -20;
-      if (a.y < -20) a.y = H + 20; if (a.y > H + 20) a.y = -20;
-    }
-    paint();
-    raf = requestAnimationFrame(step);
-  }
-  function start() {
-    resize(); seed();
-    if (raf) { cancelAnimationFrame(raf); raf = null; }
-    if (reduced) { ctx.clearRect(0, 0, W, H); paint(); } else { step(); }
-  }
-  window.addEventListener("resize", start);
-  start();
-
-  /* Animation pausieren, wenn der Hero nicht sichtbar ist */
-  if ("IntersectionObserver" in window && !reduced) {
-    var heroIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { if (!raf) step(); }
-        else if (raf) { cancelAnimationFrame(raf); raf = null; }
-      });
-    });
-    heroIo.observe(canvas.parentElement);
-  }
-})();
-</script>
 </body>
 </html>
